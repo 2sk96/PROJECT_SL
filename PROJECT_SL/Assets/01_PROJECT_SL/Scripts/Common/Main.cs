@@ -15,9 +15,8 @@ namespace ProjectSL
         Ingame,
     }
 
-    public class Main : MonoBehaviour
+    public class Main : SingletonBase<Main>
     {
-        public static Main Instance { get; private set; }
 
         // 인스펙터창에서 보이게 하기 위해 [field: SerializeField] 추가
         // property로 선언해서 { get; private set; }를 통해 외부에서 변경할 수 없기 때문에 인스펙터 창에서 확인하기 위해 [field: SerializeField] 필요
@@ -25,24 +24,29 @@ namespace ProjectSL
         [field: SerializeField] public SceneBase CurrentSceneController { get; private set; } = null;
         [field: SerializeField] public bool IsProgressSceneChanging { get; private set; } = false;
 
-        private void Awake()
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        private bool isInitialized = false;
 
         // Start 함수만 IEnumerator 로 사용 가능, 유니티 사이클에 있는 다른 함수들은 불가능
-        private IEnumerator Start()
+        private void Start()
         {
             Initialize();
-
-            yield return null;
-
+#if UNITY_EDITOR
+            Scene activeScene = UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene();
+            if (activeScene.name.Equals("Main"))
+            {
+                ChangeScene(SceneType.Title);
+            }
+#else
             ChangeScene(SceneType.Title);
+#endif
         }
 
         public void Initialize()
         {
+            if (isInitialized) return;
+
+            isInitialized = true;
+            
             // 시스템 초기화를 수행
             UIManager.Singleton.Initialize();
             InputSystem.Singleton.Initialize();
