@@ -73,10 +73,10 @@ namespace ProjectSL
             switch (sceneType)
             {
                 case SceneType.Title:
-                    //StartCoroutine(ChangeScene<TitleScene>());
+                    StartCoroutine(ChangeScene<TitleScene>());
                     break;
                 case SceneType.Ingame:
-                    //StartCoroutine(ChangeScene<IngameScene>());
+                    StartCoroutine(ChangeScene<IngameScene>());
                     break;
             }
         }
@@ -88,7 +88,7 @@ namespace ProjectSL
             UIManager.Singleton.HideAllUIs();
 
             // Loading UI 활성화
-            //UIManager.Show<LoadingUI>(UIList.LoadingUI);
+            UIManager.Show<LoadingUI>(UIList.LoadingUI);
 
             yield return new WaitForSeconds(1f);
 
@@ -120,7 +120,7 @@ namespace ProjectSL
             IsProgressSceneChanging = false;
 
             // Loading UI 비활성화
-            //UIManager.Hide<LoadingUI>(UIList.LoadingUI);
+            UIManager.Hide<LoadingUI>(UIList.LoadingUI);
         }
 
         public void SystemQuit()
