@@ -9,10 +9,21 @@ namespace ProjectSL
     {
         PANEL_START,
 
+        MainHUDUI,
+        PauseUI,
+        LoadingUI,
+        TitleUI,
+        DeathUI,
+
+        IngameMinimapUI,
+        MinimapMarkerUI_Player,
+        MinimapMarkerUI_Item,
 
         PANEL_END,
         POPUP_START,
 
+        CrosshairUI,
+        InteractionUI,
 
         POPUP_END,
     }
