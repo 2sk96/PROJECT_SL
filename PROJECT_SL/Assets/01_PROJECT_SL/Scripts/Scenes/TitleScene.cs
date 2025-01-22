@@ -15,9 +15,9 @@ namespace ProjectSL
                 yield return null;
             }
 
-            // TODO Ÿ��Ʋ ��鿡�� �ʿ��� �ʱ�ȭ �۾��� ����
+            // TODO 타이틀 장면에서 필요한 초기화 작업을 수행
 
-            // Ÿ��Ʋ ȭ�鿡�� �ʿ��� UI Ȱ��ȭ
+            // 타이틀 화면에서 필요한 UI 활성화
             //UIManager.Show<TitleUI>(UIList.TitleUI);
         }
 
@@ -25,7 +25,7 @@ namespace ProjectSL
         {
             yield return null;
 
-            // Ÿ��Ʋ ��鿡�� �ʿ��� ���� �۾��� ����
+            // 타이틀 장면에서 필요한 정리 작업을 수행
             //UIManager.Hide<TitleUI>(UIList.TitleUI);
         }
     }

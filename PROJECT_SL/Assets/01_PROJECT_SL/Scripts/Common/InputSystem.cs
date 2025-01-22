@@ -12,9 +12,11 @@ namespace ProjectSL
         public Vector2 Look { get; private set; }
         public bool IsLeftShift => Input.GetKey(KeyCode.LeftShift);
         public bool IsLeftMouseButton => Input.GetMouseButton(0);
+        public bool IsRightMouseButton => Input.GetMouseButtonDown(1);
 
         public System.Action OnClickedSpace;
         public System.Action OnClickedLeftControl;
+        public System.Action OnClickedCrouch;
         public System.Action OnClickedAlpha1;
         public System.Action OnClickedReload;
 
@@ -52,6 +54,11 @@ namespace ProjectSL
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 OnClickedLeftControl?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                OnClickedCrouch?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))

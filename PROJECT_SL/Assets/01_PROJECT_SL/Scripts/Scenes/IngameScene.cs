@@ -15,9 +15,9 @@ namespace ProjectSL
                 yield return null;
             }
 
-            // TODO �ΰ��� ��鿡�� �ʿ��� �ʱ�ȭ �۾��� ����
+            // TODO 인게임 장면에서 필요한 초기화 작업을 수행
 
-            // TODO : �ΰ��� ȭ�鿡�� �ʿ��� UI Ȱ��ȭ
+            // TODO : 인게임 화면에서 필요한 UI 활성화
             UIManager.ShowIngameUIs();
         }
 
@@ -25,7 +25,7 @@ namespace ProjectSL
         {
             yield return null;
 
-            // TODO : �ΰ��� ��鿡�� �ʿ��� ���� �۾��� ����
+            // TODO : 인게임 장면에서 필요한 정리 작업을 수행
             UIManager.HideIngameUIs();
         }
     }
