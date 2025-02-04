@@ -40,6 +40,7 @@ namespace ProjectSL
             set
             {
                 if (!isArmed) return;
+                characterAnimator.SetBool("IsAiming", value);
                 isAiming = value;
             }
         }
@@ -64,9 +65,11 @@ namespace ProjectSL
 
         [SerializeField] private float moveSpeed;       // 실제 캐릭터의 이동량에 영향을 주는 속도 값
         [SerializeField] private float targetSpeed;     // Animator의 parameter로 사용하기 위한 속도 값
+        private float smoothTargetSpeed;                // Animator의 parameter로 사용하기 위한 값
         private float smoothHorizontal;                 // Animator의 parameter로 사용하기 위한 값
         private float smoothVertical;                   // Animator의 parameter로 사용하기 위한 값
         private float smoothCrouch;                     // Animator의 parameter로 사용하기 위한 값
+        private float smoothArmed;
         private float smoothAiming;
 
         private float targetRotation;
@@ -93,15 +96,19 @@ namespace ProjectSL
 
         private void Update()
         {
+            smoothTargetSpeed = Mathf.Lerp(smoothTargetSpeed, targetSpeed, Time.deltaTime * 10f);
             smoothHorizontal = Mathf.Lerp(smoothHorizontal, movementInput.x, Time.deltaTime * 10f);
             smoothVertical = Mathf.Lerp(smoothVertical, movementInput.y, Time.deltaTime * 10f);
-            smoothCrouch = Mathf.Lerp(smoothCrouch, IsCrouch ? 1.0f : 0f, Time.deltaTime * 5f);
+            smoothCrouch = Mathf.Lerp(smoothCrouch, IsCrouch ? 1.0f : 0f, Time.deltaTime * 10f);
+            smoothArmed = Mathf.Lerp(smoothArmed, isArmed ? 1.0f : 0f, Time.deltaTime * 10f);
             smoothAiming = Mathf.Lerp(smoothAiming, isAiming ? 1.0f : 0f, Time.deltaTime * 10f);
 
             characterAnimator.SetFloat("Speed", targetSpeed);
+            characterAnimator.SetFloat("Smooth Speed", smoothTargetSpeed);
             characterAnimator.SetFloat("Horizontal", smoothHorizontal);
             characterAnimator.SetFloat("Vertical", smoothVertical);
             characterAnimator.SetFloat("Crouch", smoothCrouch);
+            characterAnimator.SetFloat("Armed", smoothArmed);
             characterAnimator.SetFloat("Aiming", smoothAiming);
             
         }
@@ -122,7 +129,7 @@ namespace ProjectSL
                 targetSpeed = isInputSomething ? 1.0f : 0.0f;
             }
 
-            if (isInputSomething && !isArmed)
+            if (isInputSomething && !isAiming)
             {
                 Vector3 inputDirection = new Vector3(input.x, 0f, input.y).normalized;
                 targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + yAxisAngle;
@@ -132,7 +139,7 @@ namespace ProjectSL
             }
 
             Vector3 movement = Vector3.zero;
-            if (isArmed) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
+            if (isAiming) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
             {
                 movement = transform.forward * movementInput.y + transform.right * movementInput.x;
             }
@@ -153,7 +160,7 @@ namespace ProjectSL
         // 이 코드는 캐릭터가 플레이어일 때만 유효한 코드같아 보이는데, 그러면 PlayerCharacterController로 위치를 바꿔줘야 하는가?
         public void Rotate(Vector3 targetAimPoint)
         {
-            if (isArmed)
+            if (isAiming)
             {
                 // 캐릭터가 바라보고 있을 방향, 플레이어의 경우 CameraSystem에서 받아온 CameraAimPoint
                 Vector3 aimTarget = targetAimPoint;
@@ -181,6 +188,11 @@ namespace ProjectSL
             {
                 //characterAnimator.SetTrigger("Holster Trigger");
             }
+        }
+
+        public void SetAimingState(bool isAim)
+        {
+            characterAnimator.SetBool("IsAiming", isAim);
         }
 
         public void Shoot()

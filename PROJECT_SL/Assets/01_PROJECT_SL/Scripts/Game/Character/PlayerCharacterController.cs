@@ -25,6 +25,7 @@ namespace ProjectSL
         private void Start()
         {
             InputSystem.Singleton.OnClickedAlpha1 += OnClickedAlpha1;
+            InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch += OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload += OnClickedReload;
         }
@@ -33,6 +34,7 @@ namespace ProjectSL
         private void OnDestroy()
         {
             InputSystem.Singleton.OnClickedAlpha1 -= OnClickedAlpha1;
+            InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch -= OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload -= OnClickedReload;
         }
@@ -54,14 +56,6 @@ namespace ProjectSL
                     linkedCharacter.Shoot();
                 }
             }
-
-            //if (InputSystem.Singleton.IsRightMouseButton)
-            //{
-            //    if (linkedCharacter.IsArmed)
-            //    {
-            //        linkedCharacter.IsAiming = InputSystem.Singleton.IsLeftMouseButton;
-            //    }
-            //}
         }
 
         // Interaction 관련 업데이트
@@ -107,6 +101,12 @@ namespace ProjectSL
         {
             linkedCharacter.IsArmed = !linkedCharacter.IsArmed;
         }
+
+        private void OnClickedAlpha2()
+        {
+            linkedCharacter.IsArmed = !linkedCharacter.IsArmed;
+        }
+
         private void OnClickedLeftControl()
         {
             linkedCharacter.IsCrouch = !linkedCharacter.IsCrouch;
