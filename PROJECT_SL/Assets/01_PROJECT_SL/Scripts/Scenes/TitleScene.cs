@@ -16,9 +16,8 @@ namespace ProjectSL
             }
 
             // TODO 타이틀 장면에서 필요한 초기화 작업을 수행
-
             // 타이틀 화면에서 필요한 UI 활성화
-            //UIManager.Show<TitleUI>(UIList.TitleUI);
+            UIManager.Show<TitleUI>(UIList.TitleUI);
         }
 
         public override IEnumerator OnEnd()
@@ -26,7 +25,7 @@ namespace ProjectSL
             yield return null;
 
             // 타이틀 장면에서 필요한 정리 작업을 수행
-            //UIManager.Hide<TitleUI>(UIList.TitleUI);
+            UIManager.Hide<TitleUI>(UIList.TitleUI);
         }
     }
 }

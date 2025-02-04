@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6e9af7144898b254b95e35b6337b265d, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -4343,9 +4343,12 @@ MonoBehaviour:
   maxHealth: 100
   walkSpeed: 2
   runSpeed: 7
+  currentWeaponType: 1
   moveSpeed: 0
   targetSpeed: 0
+  isRun: 0
   isArmed: 0
+  isAiming: 0
 --- !u!114 &6771446013941927077
 MonoBehaviour:
   m_ObjectHideFlags: 0
