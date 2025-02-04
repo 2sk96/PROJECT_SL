@@ -66,6 +66,9 @@ namespace ProjectSL
 
         private Vector2 movementInput;
 
+        private float runStaminaCost = 10f;
+        private float staminaRegen = 5f;
+
         [SerializeField] private float moveSpeed;       // 실제 캐릭터의 이동량에 영향을 주는 속도 값
         [SerializeField] private float targetSpeed;     // Animator의 parameter로 사용하기 위한 속도 값
         private float smoothTargetSpeed;                // Animator의 parameter로 사용하기 위한 값
@@ -99,6 +102,8 @@ namespace ProjectSL
 
         private void Update()
         {
+            UpdateStamina();
+            
             smoothTargetSpeed = Mathf.Lerp(smoothTargetSpeed, targetSpeed, Time.deltaTime * 10f);
             smoothHorizontal = Mathf.Lerp(smoothHorizontal, movementInput.x, Time.deltaTime * 10f);
             smoothVertical = Mathf.Lerp(smoothVertical, movementInput.y, Time.deltaTime * 10f);
@@ -114,6 +119,20 @@ namespace ProjectSL
             characterAnimator.SetFloat("Armed", smoothArmed);
             characterAnimator.SetFloat("Aiming", smoothAiming);
             
+        }
+
+        private void UpdateStamina()
+        {
+            if (IsRun)
+            {
+                currentStamina -= runStaminaCost * Time.deltaTime;
+            }
+            else
+            {
+                currentStamina += staminaRegen * Time.deltaTime;
+            }
+
+            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
         }
 
         public void Move(Vector2 input, float yAxisAngle)

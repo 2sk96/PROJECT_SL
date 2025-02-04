@@ -34,6 +34,10 @@ namespace ProjectSL
             if (IsActivateBootStrapper && false == activeScene.name.Equals("Main"))
             {
                 InternalBoot();
+                if (activeScene.name.Equals("Ingame"))
+                {
+                    UIManager.ShowIngameUIs();
+                }
             }
         }
 

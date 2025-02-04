@@ -4361,6 +4361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece7260175bc4af47b56de4303c8cdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainHUDUI: {fileID: 0}
 --- !u!143 &6771446013941927078
 CharacterController:
   m_ObjectHideFlags: 0

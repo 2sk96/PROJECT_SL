@@ -17,9 +17,13 @@ namespace ProjectSL
         private float targetYaw;
         private float targetPitch;
 
+        public MainHUDUI mainHUDUI;
+
         private void Awake()
         {
             linkedCharacter = GetComponent<CharacterBase>();
+
+            mainHUDUI = UIManager.Singleton.GetUI<MainHUDUI>(UIList.MainHUDUI);
         }
 
         private void Start()
@@ -56,6 +60,9 @@ namespace ProjectSL
                     linkedCharacter.Shoot();
                 }
             }
+
+            mainHUDUI.UpdateHealthBar(linkedCharacter.currentHealth, linkedCharacter.maxHealth);
+            mainHUDUI.UpdateStaminaBar(linkedCharacter.currentStamina, linkedCharacter.maxStamina);
         }
 
         // Interaction 관련 업데이트

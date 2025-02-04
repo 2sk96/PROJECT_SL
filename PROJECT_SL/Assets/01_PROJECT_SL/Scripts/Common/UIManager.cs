@@ -11,7 +11,7 @@ namespace ProjectSL
             // INGAME 씬에서 사용하는 UI들 활성화
             // 초기에 켜져야 하는 UI들 여기서 Show 해주면 된다
             //Show<IngameMinimapUI>(UIList.IngameMinimapUI);
-            //Show<MainHUDUI>(UIList.MainHUDUI);
+            Show<MainHUDUI>(UIList.MainHUDUI);
         }
 
         public static void HideIngameUIs()
@@ -19,7 +19,7 @@ namespace ProjectSL
             // Ingame 씬을 떠날 때 모든 UI들 비활성화
             // Ingame 씬에서 사용하는 모든 UI를 비활성화 하면 된다
             //Hide<IngameMinimapUI>(UIList.IngameMinimapUI);
-            //Hide<MainHUDUI>(UIList.MainHUDUI);
+            Hide<MainHUDUI>(UIList.MainHUDUI);
         }
         
         public static T Show<T>(UIList uiName) where T : UIBase
