@@ -23,6 +23,8 @@ namespace ProjectSL
             }
         }
         [field: SerializeField] public bool IsCrouch { get; set; } = false;
+
+
         public bool IsArmed
         {
             get => isArmed;
@@ -31,7 +33,7 @@ namespace ProjectSL
                 if (!IsAlive) return;
 
                 isArmed = value;
-                SetEquipState(isArmed);
+                characterAnimator.SetBool("IsArmed", value);
             }
         }
         public bool IsAiming
@@ -40,8 +42,8 @@ namespace ProjectSL
             set
             {
                 if (!isArmed) return;
-                characterAnimator.SetBool("IsAiming", value);
                 isAiming = value;
+                characterAnimator.SetBool("IsAiming", value);
             }
         }
         public float MoveSpeed => moveSpeed;
@@ -56,6 +58,7 @@ namespace ProjectSL
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
 
+        public int currentWeaponType = 1;
 
 
         private Animator characterAnimator;
@@ -174,25 +177,31 @@ namespace ProjectSL
             }
         }
 
-        public void SetEquipState(bool isEquip)
+        public void SetWeaponEquipState(int weaponType)
         {
-            
-            characterAnimator.SetBool("IsArmed", isEquip);
+            if (!IsAlive) return;
 
-            // Equip/Holster 애니메이션 아직 미구현
-            if (isEquip)
+            characterAnimator.SetInteger("Weapon Type", weaponType);
+
+            if (!isArmed)
             {
-                //characterAnimator.SetTrigger("Equip Trigger");
+                IsArmed = true;
+                currentWeaponType = weaponType;
+                // 무기 타입에 맞는 장착 애니메이션 트리거 (Equip Weapon)
             }
             else
             {
-                //characterAnimator.SetTrigger("Holster Trigger");
+                if (currentWeaponType == weaponType)
+                {
+                    IsArmed = false;
+                    // 무기 타입에 맞는 무기 해제 애니메이션 트리거 (Holster Weapon)
+                }
+                else
+                {
+                    currentWeaponType = weaponType;
+                    // 무기 변경 애니메이션 트리거
+                }
             }
-        }
-
-        public void SetAimingState(bool isAim)
-        {
-            characterAnimator.SetBool("IsAiming", isAim);
         }
 
         public void Shoot()

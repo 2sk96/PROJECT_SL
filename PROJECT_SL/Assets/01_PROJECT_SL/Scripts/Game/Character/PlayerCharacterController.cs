@@ -99,12 +99,12 @@ namespace ProjectSL
 
         private void OnClickedAlpha1()
         {
-            linkedCharacter.IsArmed = !linkedCharacter.IsArmed;
+            linkedCharacter.SetWeaponEquipState(1);
         }
 
         private void OnClickedAlpha2()
         {
-            linkedCharacter.IsArmed = !linkedCharacter.IsArmed;
+            linkedCharacter.SetWeaponEquipState(2);
         }
 
         private void OnClickedLeftControl()
