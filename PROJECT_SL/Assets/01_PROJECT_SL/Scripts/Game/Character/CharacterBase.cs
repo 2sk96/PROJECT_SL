@@ -214,7 +214,6 @@ namespace ProjectSL
                 {
                     if (isAiming)
                     {
-                        Debug.Log("CHECK");
                         IsAiming = false;
                     }
                     IsArmed = false;
