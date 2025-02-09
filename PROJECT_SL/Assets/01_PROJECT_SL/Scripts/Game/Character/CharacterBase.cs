@@ -12,7 +12,7 @@ namespace ProjectSL
             get => isRun;
             set
             {
-                if (IsCrouch)
+                if (IsCrouch || IsAiming)
                 {
                     isRun = false;
                 }
@@ -58,7 +58,7 @@ namespace ProjectSL
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
 
-        public int currentWeaponType = 1;
+        public int currentWeaponType = (int)WeaponType.Rifle;
 
 
         private Animator characterAnimator;
@@ -212,6 +212,11 @@ namespace ProjectSL
             {
                 if (currentWeaponType == weaponType)
                 {
+                    if (isAiming)
+                    {
+                        Debug.Log("CHECK");
+                        IsAiming = false;
+                    }
                     IsArmed = false;
                     // 무기 타입에 맞는 무기 해제 애니메이션 트리거 (Holster Weapon)
                 }

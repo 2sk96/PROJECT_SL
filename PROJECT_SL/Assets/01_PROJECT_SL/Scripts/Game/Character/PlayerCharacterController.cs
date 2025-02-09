@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace ProjectSL
 {
+    public enum WeaponType
+    {
+        Rifle=1,
+        Pistol=2,
+    }
+    
     public class PlayerCharacterController : MonoBehaviour
     {
         private CharacterBase linkedCharacter;
@@ -51,7 +57,10 @@ namespace ProjectSL
             linkedCharacter.Move(InputSystem.Singleton.Movement, Camera.main.transform.eulerAngles.y);
             linkedCharacter.Rotate(CameraSystem.Instance.CameraAimingPoint);
 
-            linkedCharacter.IsAiming = InputSystem.Singleton.IsRightMouseButton;
+            if (linkedCharacter.IsArmed)
+            {
+                linkedCharacter.IsAiming = InputSystem.Singleton.IsRightMouseButton;
+            }
 
             if (InputSystem.Singleton.IsLeftMouseButton)
             {
@@ -69,6 +78,8 @@ namespace ProjectSL
         private void FixedUpdate()
         {
             if (!linkedCharacter.IsAlive) return;
+
+            ShowCrosshair(InputSystem.Singleton.IsRightMouseButton);
         }
 
         private void LateUpdate()
@@ -77,6 +88,23 @@ namespace ProjectSL
             CameraRotation();
         }
 
+        private void ShowCrosshair(bool isRightMouseButtonClicked)
+        {
+            if (!linkedCharacter.IsArmed)
+            {
+                UIManager.Hide<CrosshairUI>(UIList.CrosshairUI);
+                return;
+            }
+            
+            if (isRightMouseButtonClicked)
+            {
+                UIManager.Show<CrosshairUI>(UIList.CrosshairUI);
+            }
+            else
+            {
+                UIManager.Hide<CrosshairUI>(UIList.CrosshairUI);
+            }
+        }
         
         // 마우스 움직임에 따른 카메라 회전을 위한 함수
         private void CameraRotation()
@@ -106,12 +134,12 @@ namespace ProjectSL
 
         private void OnClickedAlpha1()
         {
-            linkedCharacter.SetWeaponEquipState(1);
+            linkedCharacter.SetWeaponEquipState((int)WeaponType.Rifle);
         }
 
         private void OnClickedAlpha2()
         {
-            linkedCharacter.SetWeaponEquipState(2);
+            linkedCharacter.SetWeaponEquipState((int)WeaponType.Pistol);
         }
 
         private void OnClickedLeftControl()
