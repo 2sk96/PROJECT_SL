@@ -24,6 +24,7 @@ namespace ProjectSL
 
         public void UpdateDisplayMag(float currentMagazine, float magazineSize)
         {
+            Debug.Log("asdfasdf" + currentMagazine + "asdfasdf" +  magazineSize);
             bulletText.text = currentMagazine.ToString() + "/" + magazineSize.ToString();
         }
     }

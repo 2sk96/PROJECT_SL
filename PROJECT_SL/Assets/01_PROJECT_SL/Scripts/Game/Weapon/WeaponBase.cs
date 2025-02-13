@@ -9,6 +9,7 @@ namespace ProjectSL
         public Transform firePoint;
         public GameObject bulletPrefab;
         public float fireRate;
+        public float magazineSize;
         public float currentMagazine;
 
         private float lastFireTime = 0f;
@@ -18,6 +19,8 @@ namespace ProjectSL
         private void Awake()
         {
             linkedCharacter = GetComponentInParent<CharacterBase>();
+            firePoint = linkedCharacter.rifleFirePoint;
+            currentMagazine = magazineSize;
         }
 
         public void Shoot()
@@ -34,12 +37,16 @@ namespace ProjectSL
                 currentMagazine -= 1;
 
                 Destroy(newBullet, 5f);
+
+                var muzzle = EffectManager.Instance.GetMuzzleEffect("Muzzle_01");
+                muzzle.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
             }
         }
 
         public void Reload()
         {
-
+            // 임시
+            currentMagazine = magazineSize;
         }
     }
 }

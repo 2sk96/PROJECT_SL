@@ -72,19 +72,7 @@ namespace ProjectSL
 
             mainHUDUI.UpdateHealthBar(linkedCharacter.currentHealth, linkedCharacter.maxHealth);
             mainHUDUI.UpdateStaminaBar(linkedCharacter.currentStamina, linkedCharacter.maxStamina);
-
-
-            //switch (linkedCharacter.currentWeaponType)
-            //{
-            //    case (int)WeaponType.Rifle:
-            //        mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedRifle.currentMagazine, linkedCharacter.linkedRifle.magazineSize);
-            //        break;
-            //    case (int)WeaponType.Pistol:
-            //        mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedPistol.currentMagazine, linkedCharacter.linkedPistol.magazineSize);
-            //        break;
-            //}
-
-            mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedRifle.currentMagazine, linkedCharacter.linkedRifle.magazineSize);
+            mainHUDUI.UpdateDisplayMag(linkedCharacter.currentWeaponBase.currentMagazine, linkedCharacter.currentWeaponBase.magazineSize);
         }
 
         // Interaction 관련 업데이트

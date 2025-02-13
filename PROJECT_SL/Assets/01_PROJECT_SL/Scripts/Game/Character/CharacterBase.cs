@@ -42,10 +42,10 @@ namespace ProjectSL
             set
             {
                 if (!isArmed) return;
-                //isAiming = value;
-                //characterAnimator.SetBool("IsAiming", value);
-                isAiming = true;
-                characterAnimator.SetBool("IsAiming", true);
+                isAiming = value;
+                characterAnimator.SetBool("IsAiming", value);
+                //isAiming = true;
+                //characterAnimator.SetBool("IsAiming", true);
             }
         }
         public float MoveSpeed => moveSpeed;
@@ -61,8 +61,9 @@ namespace ProjectSL
         public GameObject weaponPistol;
         // 이건 필요 없을수도
         public GameObject currentWeapon;
-        public WeaponRifle linkedRifle;
-        public WeaponPistol linkedPistol;
+        public WeaponBase currentWeaponBase;
+        public WeaponBase rifleWeaponBase;
+        public WeaponBase pistolWeaponBase;
 
         public int currentWeaponType = (int)WeaponType.Rifle;
 
@@ -132,11 +133,10 @@ namespace ProjectSL
             weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
             weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
 
-            linkedRifle = weaponRifle.GetComponent<WeaponRifle>();
-            linkedPistol = weaponPistol.GetComponent<WeaponPistol>();
+            rifleWeaponBase = weaponRifle.GetComponent<WeaponBase>();
+            pistolWeaponBase = weaponPistol.GetComponent<WeaponBase>();
             currentWeapon = weaponRifle;
-            Debug.Log("linkedRifle, " + linkedRifle.currentMagazine);
-            Debug.Log("linkedPistol, " + linkedPistol.currentMagazine);
+            currentWeaponBase = rifleWeaponBase;
         }
 
         private void Start()
@@ -166,18 +166,22 @@ namespace ProjectSL
             
         }
 
+        // 임시
+        // 모션 이벤트로 손 붙혔다 때는거 설정해 줘야 함
         private void SetCurrentWeapon()
         {
-            
+
             if (currentWeaponType == (int)WeaponType.Rifle)
             {
                 currentWeapon = weaponRifle;
+                currentWeaponBase = rifleWeaponBase;
                 weaponPistol.transform.SetParent(rightWaistTransform);
                 weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
             }
             if (currentWeaponType == (int)WeaponType.Pistol)
             {
                 currentWeapon = weaponPistol;
+                currentWeaponBase = pistolWeaponBase;
                 weaponRifle.transform.SetParent(backTransform);
                 weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
             }
@@ -300,46 +304,24 @@ namespace ProjectSL
         {
             // 총기 사용 중 발사를 할 때 실행될 스크립트
             if (!IsArmed || isReloading) return;
-            if (currentWeaponType == (int)WeaponType.Rifle)
+            if (currentWeaponBase.currentMagazine <= 0)
             {
-                if (linkedRifle.currentMagazine <= 0)
-                {
-                    Reload();
-                    return;
-                }
-
-                linkedRifle.Shoot();
+                Reload();
+                return;
             }
-            if (currentWeaponType == (int)WeaponType.Pistol)
-            {
-                if (linkedPistol.currentMagazine <= 0)
-                {
-                    Reload();
-                    return;
-                }
-
-                linkedPistol.Shoot();
-            }
+            currentWeaponBase.Shoot();
         }
 
         public void Reload()
         {
             // 총기 사용 중 재장전을 할 때 실행될 스크립트
             if (!IsArmed) return;
-            //characterAnimator.SetTrigger("Reload Trigger");
 
             if (!isReloading)
             {
                 characterAnimator.SetTrigger("Reload Trigger");
                 isReloading = true;
-                if (currentWeaponType == (int)WeaponType.Rifle)
-                {
-                    linkedRifle.Reload();
-                }
-                if (currentWeaponType == (int)WeaponType.Pistol)
-                {
-                    linkedPistol.Reload();
-                }
+                currentWeaponBase.Reload();
             }
         }
 
@@ -391,7 +373,6 @@ namespace ProjectSL
 
         private void OnReloadEnd()
         {
-            Debug.Log("asdfasdfasdf");
             // IK 관련 작업 
             isReloading = false;
             // 연결된 무기의 탄창 채우기
