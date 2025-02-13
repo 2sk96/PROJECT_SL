@@ -42,14 +42,41 @@ namespace ProjectSL
             set
             {
                 if (!isArmed) return;
-                isAiming = value;
-                characterAnimator.SetBool("IsAiming", value);
+                //isAiming = value;
+                //characterAnimator.SetBool("IsAiming", value);
+                isAiming = true;
+                characterAnimator.SetBool("IsAiming", true);
             }
         }
         public float MoveSpeed => moveSpeed;
         public bool IsAlive => currentHealth > 0f;
         public Transform CameraPivot { get; private set; }
 
+        // 총 관련
+        public GameObject riflePrefab;
+        public GameObject pistolPrefab;
+        public Transform rifleFirePoint;
+        public Transform pistolFirePoint;
+        public GameObject weaponRifle;
+        public GameObject weaponPistol;
+        // 이건 필요 없을수도
+        public GameObject currentWeapon;
+        public WeaponRifle linkedRifle;
+        public WeaponPistol linkedPistol;
+
+        public int currentWeaponType = (int)WeaponType.Rifle;
+
+        public Vector3 equipOffsetPos;
+        public Vector3 equipOffsetRot;
+        // 무기에 따라 equipOffset이 바뀌면 rifle/pistol 나눠야함
+        public Vector3 rifleHolsterOffsetPos;
+        public Vector3 rifleHolsterOffsetRot;
+        public Vector3 pistolHolsterOffsetPos;
+        public Vector3 pistolHolsterOffsetRot;
+
+        public bool isReloading = false;
+
+        // 캐릭터 스탯 관련
         public float currentHealth;
         public float currentStamina;
         public float maxStamina = 100f;
@@ -58,7 +85,6 @@ namespace ProjectSL
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
 
-        public int currentWeaponType = (int)WeaponType.Rifle;
 
 
         private Animator characterAnimator;
@@ -82,6 +108,10 @@ namespace ProjectSL
         private float rotationVelocity;
         private float rotationSmoothTime = 0.1f;
 
+        private Transform rightHandTransform;       // 무기를 장착했을 때 위치
+        private Transform backTransform;            // 라이플을 장착하지 않았을 때 위치 (등)
+        private Transform rightWaistTransform;      // 권총을 장착하지 않았을 때 위치 (오른쪽 허리춤)
+
         [SerializeField] private bool isRun = false;
         [SerializeField] private bool isArmed = false;
         [SerializeField] private bool isAiming = false;
@@ -92,6 +122,21 @@ namespace ProjectSL
             characterController = GetComponent<CharacterController>();
 
             CameraPivot = transform.Find("CameraPivot");
+
+            rightHandTransform = characterAnimator.GetBoneTransform(HumanBodyBones.RightHand);
+            backTransform = characterAnimator.GetBoneTransform(HumanBodyBones.Spine);
+            rightWaistTransform = characterAnimator.GetBoneTransform(HumanBodyBones.RightUpperLeg);
+
+            weaponRifle = Instantiate(riflePrefab, backTransform);
+            weaponPistol = Instantiate(pistolPrefab, rightWaistTransform);
+            weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
+            weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
+
+            linkedRifle = weaponRifle.GetComponent<WeaponRifle>();
+            linkedPistol = weaponPistol.GetComponent<WeaponPistol>();
+            currentWeapon = weaponRifle;
+            Debug.Log("linkedRifle, " + linkedRifle.currentMagazine);
+            Debug.Log("linkedPistol, " + linkedPistol.currentMagazine);
         }
 
         private void Start()
@@ -121,6 +166,28 @@ namespace ProjectSL
             
         }
 
+        private void SetCurrentWeapon()
+        {
+            
+            if (currentWeaponType == (int)WeaponType.Rifle)
+            {
+                currentWeapon = weaponRifle;
+                weaponPistol.transform.SetParent(rightWaistTransform);
+                weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
+            }
+            if (currentWeaponType == (int)WeaponType.Pistol)
+            {
+                currentWeapon = weaponPistol;
+                weaponRifle.transform.SetParent(backTransform);
+                weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
+            }
+
+            if (isArmed)
+            {
+                currentWeapon.transform.SetParent(rightHandTransform);
+                currentWeapon.transform.SetLocalPositionAndRotation(equipOffsetPos, Quaternion.Euler(equipOffsetRot));
+            }
+        }
         private void UpdateStamina()
         {
             if (IsRun)
@@ -225,16 +292,109 @@ namespace ProjectSL
                     // 무기 변경 애니메이션 트리거
                 }
             }
+
+            SetCurrentWeapon();
         }
 
         public void Shoot()
         {
             // 총기 사용 중 발사를 할 때 실행될 스크립트
+            if (!IsArmed || isReloading) return;
+            if (currentWeaponType == (int)WeaponType.Rifle)
+            {
+                if (linkedRifle.currentMagazine <= 0)
+                {
+                    Reload();
+                    return;
+                }
+
+                linkedRifle.Shoot();
+            }
+            if (currentWeaponType == (int)WeaponType.Pistol)
+            {
+                if (linkedPistol.currentMagazine <= 0)
+                {
+                    Reload();
+                    return;
+                }
+
+                linkedPistol.Shoot();
+            }
         }
 
         public void Reload()
         {
             // 총기 사용 중 재장전을 할 때 실행될 스크립트
+            if (!IsArmed) return;
+            //characterAnimator.SetTrigger("Reload Trigger");
+
+            if (!isReloading)
+            {
+                characterAnimator.SetTrigger("Reload Trigger");
+                isReloading = true;
+                if (currentWeaponType == (int)WeaponType.Rifle)
+                {
+                    linkedRifle.Reload();
+                }
+                if (currentWeaponType == (int)WeaponType.Pistol)
+                {
+                    linkedPistol.Reload();
+                }
+            }
+        }
+
+
+
+
+
+
+        // 재장전 관련 모션 이벤트 모음
+        public void OnPistolStandRelaxedReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnPistolStandAimReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnPistolCrouchRelaxedReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnPistolCrouchAimReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnRifleStandRelaxedReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnRifleStandAimReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnRifleCrouchRelaxedReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        public void OnRifleCrouchAimReloadEnd()
+        {
+            OnReloadEnd();
+        }
+
+        private void OnReloadEnd()
+        {
+            Debug.Log("asdfasdfasdf");
+            // IK 관련 작업 
+            isReloading = false;
+            // 연결된 무기의 탄창 채우기
         }
     }
 }

@@ -72,6 +72,19 @@ namespace ProjectSL
 
             mainHUDUI.UpdateHealthBar(linkedCharacter.currentHealth, linkedCharacter.maxHealth);
             mainHUDUI.UpdateStaminaBar(linkedCharacter.currentStamina, linkedCharacter.maxStamina);
+
+
+            //switch (linkedCharacter.currentWeaponType)
+            //{
+            //    case (int)WeaponType.Rifle:
+            //        mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedRifle.currentMagazine, linkedCharacter.linkedRifle.magazineSize);
+            //        break;
+            //    case (int)WeaponType.Pistol:
+            //        mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedPistol.currentMagazine, linkedCharacter.linkedPistol.magazineSize);
+            //        break;
+            //}
+
+            mainHUDUI.UpdateDisplayMag(linkedCharacter.linkedRifle.currentMagazine, linkedCharacter.linkedRifle.magazineSize);
         }
 
         // Interaction 관련 업데이트
@@ -141,12 +154,7 @@ namespace ProjectSL
         {
             linkedCharacter.SetWeaponEquipState((int)WeaponType.Pistol);
         }
-
-        private void OnClickedLeftControl()
-        {
-            linkedCharacter.IsCrouch = !linkedCharacter.IsCrouch;
-        }
-
+        
         private void OnClickedCrouch()
         {
             linkedCharacter.IsCrouch = !linkedCharacter.IsCrouch;
