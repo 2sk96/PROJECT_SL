@@ -1300,7 +1300,7 @@ BlendTree:
   m_Name: Crouch
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4627e7229ea7b784fb0c6ea6372adb30, type: 3}
+    m_Motion: {fileID: 7400000, guid: d0897c8a41dabdd4387a74f78f6538af, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -3533,7 +3533,7 @@ BlendTree:
   m_Name: Stand
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ef1a2f30a6f701646906255ad24b0282, type: 3}
+    m_Motion: {fileID: 7400000, guid: d9364a54e87cb384ebd9cd4f53ea9449, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

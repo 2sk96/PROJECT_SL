@@ -19,7 +19,6 @@ namespace ProjectSL
         private void Awake()
         {
             linkedCharacter = GetComponentInParent<CharacterBase>();
-            firePoint = linkedCharacter.rifleFirePoint;
             currentMagazine = magazineSize;
         }
 
