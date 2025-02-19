@@ -185,14 +185,15 @@ namespace ProjectSL
 
         // isAiming일때
         // 살아있을 때
+        // 무기 변경/장착/해제 모션을 하고 있지 않을 때
         private void CheckActiveIK_Aiming()
         {
-            isActiveAimingIK = isAiming && IsAlive;
+            isActiveAimingIK = isAiming && IsAlive && !isChangingWeaponState;
         }
 
         // 라이플을 장착중일 때 (currentWeaponType 체크, isArmed 체크)
         // 재장전을 하고 있지 않을 때 (isReloading 체크)
-        // 무기 변경/장착/해제 모션을 하고 있지 않을 때 (해야함!!)
+        // 무기 변경/장착/해제 모션을 하고 있지 않을 때
         private void CheckActiveIK_LeftHand()
         {
             isActiveLeftHandIKRifle = currentWeaponType == (int)WeaponType.Rifle && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
@@ -286,7 +287,6 @@ namespace ProjectSL
             {
                 IsArmed = true;
                 currentWeaponType = weaponType;
-                // 무기 타입에 맞는 장착 애니메이션 트리거 (Equip Weapon)
             }
             else
             {
@@ -297,12 +297,10 @@ namespace ProjectSL
                         IsAiming = false;
                     }
                     IsArmed = false;
-                    // 무기 타입에 맞는 무기 해제 애니메이션 트리거 (Holster Weapon)
                 }
                 else
                 {
                     currentWeaponType = weaponType;
-                    // 무기 변경 애니메이션 트리거
                 }
             }
 
@@ -324,8 +322,8 @@ namespace ProjectSL
 
         public void Shoot()
         {
-            // 총기 사용 중 발사를 할 때 실행될 스크립트
-            if (!IsArmed || isReloading || isChangingWeaponState) return;
+            if (!isAiming || isReloading || isChangingWeaponState) return;
+
             if (currentWeaponBase.currentMagazine <= 0)
             {
                 Reload();

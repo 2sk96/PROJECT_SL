@@ -53,7 +53,6 @@ namespace ProjectSL
 
         public void Reload()
         {
-            // 임시
             currentMagazine = magazineSize;
         }
     }
