@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ namespace ProjectSL
 
         private Camera mainCamera;
         public Transform aimSphere;
-
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private CharacterBase linkedCharacter;
 
         private void Awake()
         {
@@ -37,6 +39,23 @@ namespace ProjectSL
             // 충돌이 없다면 그냥 이 ray가 1000f만큼 간 후의 좌표
 
             aimSphere.transform.position = CameraAimingPoint;
+
+            ZoomControl();
+        }
+
+        private void ZoomControl()
+        {
+            float fieldOfView;
+            if (linkedCharacter.IsAiming)
+            {
+                fieldOfView = 45;
+            }
+            else
+            {
+                fieldOfView = 60;
+            }
+
+            virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, fieldOfView, Time.deltaTime * 10f);
         }
     }
 }
