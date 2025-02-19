@@ -5713,7 +5713,6 @@ MonoBehaviour:
   pistolFirePoint: {fileID: 682554970}
   weaponRifle: {fileID: 0}
   weaponPistol: {fileID: 0}
-  currentWeapon: {fileID: 0}
   currentWeaponBase: {fileID: 0}
   rifleWeaponBase: {fileID: 0}
   pistolWeaponBase: {fileID: 0}
@@ -5723,7 +5722,7 @@ MonoBehaviour:
   pistolEquipOffsetPos: {x: 0.14, y: -0.05, z: 0.009}
   pistolEquipOffsetRot: {x: 0, y: 90, z: 90}
   rifleHolsterOffsetPos: {x: -0.209, y: 0.164, z: 0.083}
-  rifleHolsterOffsetRot: {x: 176.446, y: 272.034, z: 90.502}
+  rifleHolsterOffsetRot: {x: 4, y: 92, z: 90}
   pistolHolsterOffsetPos: {x: -0.02, y: 0, z: 0.085}
   pistolHolsterOffsetRot: {x: 0, y: -90, z: 15.27}
   aimingRig: {fileID: 1991515767}
@@ -5741,7 +5740,6 @@ MonoBehaviour:
   isRun: 0
   isArmed: 0
   isAiming: 0
-  isShootingAllowed: 0
   isChangingWeaponState: 0
 --- !u!114 &6771446013941927077
 MonoBehaviour:

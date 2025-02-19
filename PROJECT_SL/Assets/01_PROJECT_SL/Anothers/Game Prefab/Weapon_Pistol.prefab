@@ -385,3 +385,4 @@ MonoBehaviour:
   fireRate: 0.5
   magazineSize: 7
   currentMagazine: 0
+  weaponType: 2

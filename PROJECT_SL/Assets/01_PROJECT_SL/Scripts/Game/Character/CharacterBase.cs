@@ -61,7 +61,6 @@ namespace ProjectSL
         public GameObject weaponRifle;
         public GameObject weaponPistol;
         // 이건 필요 없을수도
-        public GameObject currentWeapon;
         public WeaponBase currentWeaponBase;
         public WeaponBase rifleWeaponBase;
         public WeaponBase pistolWeaponBase;
@@ -127,7 +126,6 @@ namespace ProjectSL
         [SerializeField] private bool isRun = false;
         [SerializeField] private bool isArmed = false;
         [SerializeField] private bool isAiming = false;
-        [SerializeField] private bool isShootingAllowed = false;        // 총기 관련 모션 실행 중 사격 가능 유무를 위한 bool parameter
         [SerializeField] private bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
 
         private void Awake()
@@ -148,7 +146,6 @@ namespace ProjectSL
 
             rifleWeaponBase = weaponRifle.GetComponent<WeaponBase>();
             pistolWeaponBase = weaponPistol.GetComponent<WeaponBase>();
-            currentWeapon = weaponRifle;
             currentWeaponBase = rifleWeaponBase;
         }
 
@@ -198,43 +195,11 @@ namespace ProjectSL
         // 무기 변경/장착/해제 모션을 하고 있지 않을 때 (해야함!!)
         private void CheckActiveIK_LeftHand()
         {
-            isActiveLeftHandIKRifle = currentWeaponType == (int)WeaponType.Rifle && isArmed && IsAlive && !isReloading;
-            isActiveLeftHandIKPistol = currentWeaponType == (int)WeaponType.Pistol && isArmed && IsAlive && !isReloading;
+            isActiveLeftHandIKRifle = currentWeaponType == (int)WeaponType.Rifle && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
+            isActiveLeftHandIKPistol = currentWeaponType == (int)WeaponType.Pistol && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
         }
 
-        // 임시
-        // 모션 이벤트로 손 붙혔다 때는거 설정해 줘야 함
-        private void SetCurrentWeapon()
-        {
-            // 사격 불가 isShootingAllowed = false
-            // IK 비활성화 isChangingWeaponState = true
-            Vector3 equipOffsetPos = Vector3.zero;
-            Vector3 equipOffsetRot = Vector3.zero;
-            if (currentWeaponType == (int)WeaponType.Rifle)
-            {
-                currentWeapon = weaponRifle;
-                currentWeaponBase = rifleWeaponBase;
-                weaponPistol.transform.SetParent(rightWaistTransform);
-                weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
-                equipOffsetPos = rifleEquipOffsetPos;
-                equipOffsetRot = rifleEquipOffsetRot;
-            }
-            if (currentWeaponType == (int)WeaponType.Pistol)
-            {
-                currentWeapon = weaponPistol;
-                currentWeaponBase = pistolWeaponBase;
-                weaponRifle.transform.SetParent(backTransform);
-                weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
-                equipOffsetPos = pistolEquipOffsetPos;
-                equipOffsetRot = pistolEquipOffsetRot;
-            }
-
-            if (isArmed)
-            {
-                currentWeapon.transform.SetParent(rightHandTransform);
-                currentWeapon.transform.SetLocalPositionAndRotation(equipOffsetPos, Quaternion.Euler(equipOffsetRot));
-            }
-        }
+        
         private void UpdateStamina()
         {
             if (IsRun)
@@ -312,8 +277,9 @@ namespace ProjectSL
 
         public void SetWeaponEquipState(int weaponType)
         {
-            if (!IsAlive) return;
+            if (!IsAlive || isChangingWeaponState) return;
 
+            isChangingWeaponState = true;
             characterAnimator.SetInteger("Weapon Type", weaponType);
 
             if (!isArmed)
@@ -343,10 +309,23 @@ namespace ProjectSL
             SetCurrentWeapon();
         }
 
+        // 현재 장착중인 무기의 WeaponBase를 currentWeaponBase로 설정
+        private void SetCurrentWeapon()
+        {
+            if (currentWeaponType == (int)WeaponType.Rifle)
+            {
+                currentWeaponBase = rifleWeaponBase;
+            }
+            if (currentWeaponType == (int)WeaponType.Pistol)
+            {
+                currentWeaponBase = pistolWeaponBase;
+            }
+        }
+
         public void Shoot()
         {
             // 총기 사용 중 발사를 할 때 실행될 스크립트
-            if (!IsArmed || isReloading) return;
+            if (!IsArmed || isReloading || isChangingWeaponState) return;
             if (currentWeaponBase.currentMagazine <= 0)
             {
                 Reload();
@@ -358,23 +337,112 @@ namespace ProjectSL
         public void Reload()
         {
             // 총기 사용 중 재장전을 할 때 실행될 스크립트
-            if (!IsArmed) return;
+            if (!IsArmed || isChangingWeaponState) return;
 
             if (!isReloading)
             {
                 isChangingWeaponState = true;
                 characterAnimator.SetTrigger("Reload Trigger");
                 isReloading = true;
-                currentWeaponBase.Reload();
             }
         }
 
+        private void OnPistolToHand()
+        {
+            weaponPistol.transform.SetParent(rightHandTransform);
+            weaponPistol.transform.SetLocalPositionAndRotation(pistolEquipOffsetPos, Quaternion.Euler(pistolEquipOffsetRot));
+        }
 
+        private void OnPistolToWaist()
+        {
+            weaponPistol.transform.SetParent(rightWaistTransform);
+            weaponPistol.transform.SetLocalPositionAndRotation(pistolHolsterOffsetPos, Quaternion.Euler(pistolHolsterOffsetRot));
+        }
 
+        private void OnRifleToHand()
+        {
+            weaponRifle.transform.SetParent(rightHandTransform);
+            weaponRifle.transform.SetLocalPositionAndRotation(rifleEquipOffsetPos, Quaternion.Euler(rifleEquipOffsetRot));
+        }
 
+        private void OnRifleToBack()
+        {
+            weaponRifle.transform.SetParent(backTransform);
+            weaponRifle.transform.SetLocalPositionAndRotation(rifleHolsterOffsetPos, Quaternion.Euler(rifleHolsterOffsetRot));
+        }
 
+        // 무기 장착/해제/변경 이벤트
+        public void OnPistolEquipToHand()
+        {
+            OnPistolToHand();
+        }
 
-        // 재장전 관련 모션 이벤트 모음
+        public void OnPistolEquipComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        public void OnPistolHolsterToWaist()
+        {
+            OnPistolToWaist();
+        }
+
+        public void OnPistolHolsterComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        public void OnRifleEquipToHand()
+        {
+            OnRifleToHand();
+        }
+
+        public void OnRifleEquipComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        public void OnRifleHolsterToBack()
+        {
+            OnRifleToBack();
+        }
+
+        public void OnRifleHolsterComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        public void OnPistolToRiflePistolToWaist()
+        {
+            OnPistolToWaist();
+        }
+
+        public void OnPistolToRifleRifleToHand()
+        {
+            OnRifleToHand();
+        }
+
+        public void OnPistolToRifleComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        public void OnRifleToPistolRifleToBack()
+        {
+            OnRifleToBack();
+        }
+
+        public void OnRifleToPistolPistolToHand()
+        {
+            OnPistolToHand();
+        }
+
+        public void OnRifleToPistolComplete()
+        {
+            isChangingWeaponState = false;
+        }
+
+        // 재장전 관련 모션 이벤트
         public void OnPistolStandRelaxedReloadEnd()
         {
             OnReloadEnd();
@@ -420,7 +488,7 @@ namespace ProjectSL
             // IK 관련 작업
             isChangingWeaponState = false;
             isReloading = false;
-            // 연결된 무기의 탄창 채우기
+            currentWeaponBase.Reload();
         }
     }
 }

@@ -13,12 +13,21 @@ namespace ProjectSL
         public float currentMagazine;
 
         private float lastFireTime = 0f;
-
+        
         private CharacterBase linkedCharacter;
+        [SerializeField] private int weaponType;
 
         private void Awake()
         {
             linkedCharacter = GetComponentInParent<CharacterBase>();
+            if (weaponType == (int)WeaponType.Rifle)
+            {
+                firePoint = linkedCharacter.rifleFirePoint;
+            }
+            else if(weaponType == (int)WeaponType.Pistol)
+            {
+                firePoint = linkedCharacter.pistolFirePoint;
+            }
             currentMagazine = magazineSize;
         }
 
