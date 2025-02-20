@@ -23,13 +23,22 @@ namespace ProjectSL
         private float targetYaw;
         private float targetPitch;
 
+        private List<IInteractable> prevInteractables = new List<IInteractable>();
+
         public MainHUDUI mainHUDUI;
+        public InteractionUI interactionUI;
+
+        public float interactionRadius = 2f;
+        public LayerMask interactionLayer;
+        public List<IInteractable> interactables = new List<IInteractable>();
+
 
         private void Awake()
         {
             linkedCharacter = GetComponent<CharacterBase>();
 
             mainHUDUI = UIManager.Singleton.GetUI<MainHUDUI>(UIList.MainHUDUI);
+            interactionUI = UIManager.Show<InteractionUI>(UIList.InteractionUI);
         }
 
         private void Start()
@@ -38,6 +47,7 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch += OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload += OnClickedReload;
+            InputSystem.Singleton.OnClickedInteraction += OnClickedInteraction;
         }
 
 
@@ -47,6 +57,7 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch -= OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload -= OnClickedReload;
+            InputSystem.Singleton.OnClickedInteraction -= OnClickedInteraction;
         }
 
         private void Update()
@@ -81,6 +92,7 @@ namespace ProjectSL
             if (!linkedCharacter.IsAlive) return;
 
             ShowCrosshair(InputSystem.Singleton.IsRightMouseButton);
+            ShowInteractionUI();
         }
 
         private void LateUpdate()
@@ -104,6 +116,57 @@ namespace ProjectSL
             else
             {
                 UIManager.Hide<CrosshairUI>(UIList.CrosshairUI);
+            }
+        }
+
+        
+
+
+        private void ShowInteractionUI()
+        {
+            // 무장중이 아닐때는 interactables 관련 기능 실행되어야 함
+            if (!linkedCharacter.IsArmed)
+            {
+                // 기존 Interactables 리스트를 prevInteractables 로 저장 후 interactables 초기화
+                prevInteractables = new List<IInteractable>(interactables);
+                interactables.Clear();
+                // layerMask 이내 주변 Collider 추출
+                Collider[] overlapped = Physics.OverlapSphere(transform.position, interactionRadius, interactionLayer);
+                // overlapped 배열 돌면서 IInteractable 을 상속받은 오브젝트일 경우 interactables 에 추가
+                for (int i = 0; i < overlapped.Length; i++)
+                {
+                    if (overlapped[i].TryGetComponent(out IInteractable interactable))
+                    {
+                        interactables.Add(interactable);
+                    }
+                }
+                // TODO : prevInteractables 와 새로 갱신 된 interactables 차이가 있다면? => InteractionUI 에 갱신해준다
+                // 새로운 interactables 를 돌면서 prevInteractables에 없다면 해당 InteractionContent 추가
+                for (int i = 0; i < interactables.Count; i++)
+                {
+                    if (!prevInteractables.Contains(interactables[i]))
+                    {
+                        interactionUI.AddInteractionContent(interactables[i]);
+                    }
+                }
+                // 기존 prevInteractables 를 돌면서 갱신된 interactables 에 없다면 해당 InteractionContent 제거
+                for (int i = 0; i < prevInteractables.Count; i++)
+                {
+                    if (!interactables.Contains(prevInteractables[i]))
+                    {
+                        interactionUI.RemoveInteractionContent(prevInteractables[i]);
+                    }
+                }
+            }
+            // 무장중일 때는 prevInteractables, interactables, InteractionUI 의 createdContents 초기화 진행
+            else
+            {
+                if (interactionUI.createdContents.Count > 0)
+                {
+                    interactionUI.RemoveAllInteractionContent();
+                    prevInteractables.Clear();
+                    interactables.Clear();
+                }
             }
         }
         
@@ -152,5 +215,12 @@ namespace ProjectSL
             linkedCharacter.Reload();
         }
 
+        private void OnClickedInteraction()
+        {
+            if (interactables.Count > 0)
+            {
+                interactionUI.ExecuteInteract();
+            }
+        }
     }
 }

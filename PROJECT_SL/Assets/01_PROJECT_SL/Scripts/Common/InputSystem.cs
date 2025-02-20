@@ -24,7 +24,7 @@ namespace ProjectSL
         public System.Action OnMouseWheelUp;
         public System.Action OnMouseWheelDown;
 
-        public System.Action OnClickedInteraction;
+        public System.Action OnClickedInteraction;      // F
 
         public System.Action OnClickedPauseButton;
 
