@@ -79,6 +79,10 @@ namespace ProjectSL
                 {
                     linkedCharacter.Shoot();
                 }
+                //else
+                //{
+                //    linkedCharacter.IsArmed = true;
+                //}
             }
 
             mainHUDUI.UpdateHealthBar(linkedCharacter.currentHealth, linkedCharacter.maxHealth);
@@ -219,6 +223,7 @@ namespace ProjectSL
         {
             if (interactables.Count > 0)
             {
+                //linkedCharacter.
                 interactionUI.ExecuteInteract();
             }
         }

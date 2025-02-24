@@ -92,8 +92,6 @@ namespace ProjectSL
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
 
-
-
         private Animator characterAnimator;
         private CharacterController characterController;
 
@@ -158,7 +156,7 @@ namespace ProjectSL
         private void Update()
         {
             UpdateStamina();
-            
+
             smoothTargetSpeed = Mathf.Lerp(smoothTargetSpeed, targetSpeed, Time.deltaTime * 10f);
             smoothHorizontal = Mathf.Lerp(smoothHorizontal, movementInput.x, Time.deltaTime * 10f);
             smoothVertical = Mathf.Lerp(smoothVertical, movementInput.y, Time.deltaTime * 10f);
@@ -200,7 +198,6 @@ namespace ProjectSL
             isActiveLeftHandIKPistol = currentWeaponType == (int)WeaponType.Pistol && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
         }
 
-        
         private void UpdateStamina()
         {
             if (IsRun)
@@ -322,7 +319,14 @@ namespace ProjectSL
 
         public void Shoot()
         {
-            if (!isAiming || isReloading || isChangingWeaponState) return;
+            if (isArmed && !isAiming)
+            {
+                IsAiming = true;
+            }
+
+            float shootingAllowed = characterAnimator.GetFloat("ShootingAllowed");
+
+            if (!isAiming || isReloading || isChangingWeaponState || shootingAllowed < 0.95f) return;
 
             if (currentWeaponBase.currentMagazine <= 0)
             {
@@ -336,6 +340,11 @@ namespace ProjectSL
         {
             // 총기 사용 중 재장전을 할 때 실행될 스크립트
             if (!IsArmed || isChangingWeaponState) return;
+
+            if (!isArmed)
+            {
+                IsArmed = true;
+            }
 
             if (!isReloading)
             {
