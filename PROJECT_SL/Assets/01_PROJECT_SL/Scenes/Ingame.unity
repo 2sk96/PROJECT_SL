@@ -671,6 +671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6925e1955ba8584b8b5212ecd24ca58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomInFOV: 45
+  zoomOutFOV: 60
   aimSphere: {fileID: 676544877}
   virtualCamera: {fileID: 356550667}
   linkedCharacter: {fileID: 6771446013941927076}
@@ -864,37 +866,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676544876}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &682554969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 682554970}
-  m_Layer: 0
-  m_Name: Pistol_FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &682554970
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682554969}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.4, y: -0.05, z: 0.085}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1034860571165041094}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &724917983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,37 +1239,6 @@ Transform:
   - {fileID: 1654446330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1012688778
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1012688779}
-  m_Layer: 0
-  m_Name: Rifle_FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1012688779
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012688778}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.8, y: -0.054, z: 0.074}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1034860571165041094}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1082474038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,8 +3352,6 @@ Transform:
   - {fileID: 1464420542765801275}
   - {fileID: 8385746731176756187}
   - {fileID: 8615447402260087304}
-  - {fileID: 1012688779}
-  - {fileID: 682554970}
   - {fileID: 277207639}
   - {fileID: 1787758502}
   - {fileID: 1159587903}
@@ -6415,8 +6353,8 @@ MonoBehaviour:
   <IsCrouch>k__BackingField: 0
   riflePrefab: {fileID: 843092800258077952, guid: 8301b59ff19a58b458a4f7c0e52ebe4b, type: 3}
   pistolPrefab: {fileID: 6675598346978865087, guid: 1c13bff322470ea43a22f75be9f6a876, type: 3}
-  rifleFirePoint: {fileID: 1012688779}
-  pistolFirePoint: {fileID: 682554970}
+  rifleFirePoint: {fileID: 0}
+  pistolFirePoint: {fileID: 0}
   weaponRifle: {fileID: 0}
   weaponPistol: {fileID: 0}
   currentWeaponBase: {fileID: 0}

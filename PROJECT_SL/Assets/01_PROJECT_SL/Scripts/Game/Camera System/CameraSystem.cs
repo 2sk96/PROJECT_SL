@@ -9,6 +9,8 @@ namespace ProjectSL
     {
         public static CameraSystem Instance { get; private set; }
         public Vector3 CameraAimingPoint { get; private set; }
+        public float zoomInFOV = 45;
+        public float zoomOutFOV = 60;
 
         private Camera mainCamera;
         public Transform aimSphere;
@@ -40,22 +42,10 @@ namespace ProjectSL
 
             aimSphere.transform.position = CameraAimingPoint;
 
-            ZoomControl();
+            // 줌인 / 줌아웃 처리
+            float targetFOV = linkedCharacter ? linkedCharacter.IsAiming ? zoomInFOV : zoomOutFOV : zoomOutFOV;
+            virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, targetFOV, Time.deltaTime * 10f);
         }
-
-        private void ZoomControl()
-        {
-            float fieldOfView;
-            if (linkedCharacter.IsAiming)
-            {
-                fieldOfView = 45;
-            }
-            else
-            {
-                fieldOfView = 60;
-            }
-
-            virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, fieldOfView, Time.deltaTime * 10f);
-        }
+        
     }
 }
