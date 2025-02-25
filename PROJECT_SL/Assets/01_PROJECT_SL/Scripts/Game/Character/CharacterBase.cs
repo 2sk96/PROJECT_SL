@@ -82,6 +82,8 @@ namespace ProjectSL
         public Rig leftHandPistolRig;
 
         public bool isReloading = false;
+        public bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
+        public bool isChangingStateForMovement = false;
 
         // 캐릭터 스탯 관련
         public float currentHealth;
@@ -124,7 +126,7 @@ namespace ProjectSL
         [SerializeField] private bool isRun = false;
         [SerializeField] private bool isArmed = false;
         [SerializeField] private bool isAiming = false;
-        [SerializeField] private bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
+        //[SerializeField] private bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
 
         private void Awake()
         {
@@ -214,6 +216,7 @@ namespace ProjectSL
 
         public void Move(Vector2 input, float yAxisAngle)
         {
+            if (isChangingStateForMovement) return;
             movementInput = input;
             bool isInputSomething = input.sqrMagnitude > 0;
 
@@ -354,6 +357,15 @@ namespace ProjectSL
             }
         }
 
+        public void PickUp()
+        {
+            if (isArmed || isChangingWeaponState) return;
+
+            isChangingWeaponState = true;
+            isChangingStateForMovement = true;
+            characterAnimator.SetTrigger("Pick Up Trigger");
+        }
+
         private void OnPistolToHand()
         {
             weaponPistol.transform.SetParent(rightHandTransform);
@@ -488,6 +500,19 @@ namespace ProjectSL
         public void OnRifleCrouchAimReloadEnd()
         {
             OnReloadEnd();
+        }
+
+        public void OnPickUpComplete()
+        {
+            isChangingWeaponState = false;
+            isChangingStateForMovement = false;
+        }
+
+        public void OnItemPickUp()
+        {
+            // 실제 아이템 픽업 실행
+            // 필드의 아이템 사라지게 처리
+            // 플레이어의 인벤토리에 추가
         }
 
         private void OnReloadEnd()

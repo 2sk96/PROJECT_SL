@@ -8,6 +8,8 @@ namespace ProjectSL
     {
         public string Message { get; }
 
+        public Vector3 Position { get; }
+
         public void Interact();
     }
 }

@@ -128,6 +128,7 @@ namespace ProjectSL
 
         private void ShowInteractionUI()
         {
+            interactionUI.GetPlayerPosition(this.transform.position);
             // 무장중이 아닐때는 interactables 관련 기능 실행되어야 함
             if (!linkedCharacter.IsArmed)
             {
@@ -221,11 +222,18 @@ namespace ProjectSL
 
         private void OnClickedInteraction()
         {
-            if (interactables.Count > 0)
+            if (interactables.Count > 0 && !linkedCharacter.IsArmed && !linkedCharacter.isChangingWeaponState)
             {
-                //linkedCharacter.
+                linkedCharacter.PickUp();
+
+                // 이걸 여기서 하면 안될거 같은데 잘 모르겠다
                 interactionUI.ExecuteInteract();
             }
+        }
+
+        public void OnExecuteInteraction()
+        {
+            interactionUI.ExecuteInteract();
         }
     }
 }

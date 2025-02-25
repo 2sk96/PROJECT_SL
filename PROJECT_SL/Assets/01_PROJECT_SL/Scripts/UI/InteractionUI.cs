@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,26 +8,16 @@ namespace ProjectSL
     public class InteractionUI : UIBase
     {
         public List<InteractionUI_Item> createdContents = new List<InteractionUI_Item>();
-        private int selectedIndex = -1;
+        [SerializeField] private int selectedIndex = -1;
 
         [SerializeField] private InteractionUI_Item itemPrefab;
         [SerializeField] private Transform contentsGroup;
+
+        [SerializeField] private Vector3 playerPosition;
         
         private void Awake()
         {
             itemPrefab.gameObject.SetActive(false);
-        }
-
-        private void Start()
-        {
-            InputSystem.Singleton.OnMouseWheelUp += OnMouseScrollUp;
-            InputSystem.Singleton.OnMouseWheelDown += OnMouseScrollDown;
-        }
-
-        private void OnDestroy()
-        {
-            InputSystem.Singleton.OnMouseWheelUp -= OnMouseScrollUp;
-            InputSystem.Singleton.OnMouseWheelDown -= OnMouseScrollDown;
         }
 
         public override void Hide()
@@ -35,41 +26,55 @@ namespace ProjectSL
             RemoveAllInteractionContent();
         }
 
-
-        private void OnMouseScrollUp()
+        private void Update()
         {
-            // createdContents 가 비어있다면 > 스크롤을 돌려도 아무 일도 일어나지 않는다
-            if (createdContents.Count <= 0) return;
-
-            if (selectedIndex >= 0 && selectedIndex < createdContents.Count)
+            if (createdContents.Count > 0)
             {
-                createdContents[selectedIndex].isSelected = false;
+                SelectClosestInteractableData();
             }
-            selectedIndex--;
-            if (selectedIndex < 0)
-            {
-                selectedIndex = createdContents.Count - 1;
-            }
-            createdContents[selectedIndex].isSelected = true;
         }
 
-        private void OnMouseScrollDown()
+        // 가장 가까운 interaction content 만 활성화 시켜주는 함수
+        private void SelectClosestInteractableData()
         {
-            // createdContents 가 비어있다면 > 스크롤을 돌려도 아무 일도 일어나지 않는다
-            if (createdContents.Count <= 0) return;
-            // 기존 isSelected 되어있던 InteractionUI_Item 의 isSelected 해제
-            if (selectedIndex >= 0 && selectedIndex < createdContents.Count)
+            float closestDistance = 0;
+            int closestIndex = 0;
+            for (int i = 0; i < createdContents.Count; i++)
             {
-                createdContents[selectedIndex].isSelected = false;
+                float distance = CalculateDistance(createdContents[i].InteractableData.Position);
+                if (closestDistance == 0)
+                {
+                    closestDistance = distance;
+                    closestIndex = i;
+                    createdContents[i].isSelected = true;
+                }
+                else
+                {
+                    if (distance < closestDistance)
+                    {
+                        createdContents[closestIndex].isSelected = false;
+                        closestDistance = distance;
+                        closestIndex = i;
+                        createdContents[i].isSelected = true;
+                    }
+                    else
+                    {
+                        createdContents[i].isSelected = false;
+                    }
+                }
             }
-            // selectedIndex 값 변경, 범위가 아래로 벗어나면 가장 위로 초기화
-            selectedIndex++;
-            if (selectedIndex >= createdContents.Count)
-            {
-                selectedIndex = 0;
-            }
-            // selectedIndex 값에 맞게 IsSelected = true 를 새로운 InteracionUI_Item 에 부여
-            createdContents[selectedIndex].isSelected = true;
+            selectedIndex = closestIndex;
+        }
+
+        private float CalculateDistance(Vector3 itemPosition)
+        {
+            float distance = Vector3.Distance(itemPosition, playerPosition);
+            return distance;
+        }
+
+        public void GetPlayerPosition(Vector3 position)
+        {
+            playerPosition = position;
         }
 
         public void AddInteractionContent(IInteractable interactable)
@@ -79,13 +84,12 @@ namespace ProjectSL
             InteractionUI_Item newItem = Instantiate(itemPrefab, contentsGroup);
             newItem.gameObject.SetActive(true);
             newItem.ContentsText = interactable.Message;
-            // createdContents가 새로 생길 경우에만 isSelected 및 selectedIndex 설정
+            // createdContents가 새로 생길 경우에는 isSelected 설정
             if (createdContents.Count == 0)
             {
                 newItem.isSelected = true;
-                selectedIndex = 0;
             }
-            // 기존 createdContents가 있을 경우 isSelected 설정 X, selectedIndex도 변경 X
+            // 기존 createdContents가 있을 경우 isSelected 설정 X
             else
             {
                 newItem.isSelected = false;
@@ -95,41 +99,13 @@ namespace ProjectSL
             createdContents.Add(newItem);
         }
 
-        // 일단 여기까지만 조건 파악이 너무 헷갈린다
         public void RemoveInteractionContent(IInteractable interactable)
         {
             if (!createdContents.Exists(x => x.InteractableData == interactable)) return;
 
             int targetIndex = createdContents.FindIndex(x => x.InteractableData == interactable);
-            if (targetIndex >= 0)
-            {
-                if (targetIndex == selectedIndex)
-                {
-                    if (targetIndex == 0)
-                    {
-                        // selectedIndex 유지, 기존 createdContents 가 1 이상일때만 작동하도록
-                        if (createdContents.Count > 1)
-                        {
-                            createdContents[selectedIndex + 1].isSelected = true;
-                        }
-                    }
-                    else if (targetIndex < createdContents.Count - 1)
-                    {
-                        // selectedIndex 유지..?
-                        createdContents[selectedIndex + 1].isSelected = true;
-                    }
-                    else if (targetIndex == createdContents.Count - 1)
-                    {
-                        selectedIndex -= 1;
-                        createdContents[selectedIndex].isSelected = true;
-
-                    }
-                }
-
-
-                Destroy(createdContents[targetIndex].gameObject);
-                createdContents.RemoveAt(targetIndex);
-            }
+            Destroy(createdContents[targetIndex].gameObject);
+            createdContents.RemoveAt(targetIndex);
         }
 
 
