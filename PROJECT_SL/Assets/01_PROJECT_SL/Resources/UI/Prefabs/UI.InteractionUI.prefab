@@ -313,6 +313,7 @@ MonoBehaviour:
   createdContents: []
   itemPrefab: {fileID: 4274273180093061977}
   contentsGroup: {fileID: 5598836306104188544}
+  playerPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &6550147464542925858
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,3 +501,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: {fileID: 2731204834883372464}
   text: {fileID: 1111974998385627895}
+  interactionContent: {fileID: 6840564058395483039}
