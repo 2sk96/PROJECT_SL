@@ -14,6 +14,10 @@ namespace ProjectSL
     
     public class PlayerCharacterController : MonoBehaviour
     {
+        public static PlayerCharacterController Instance { get; private set; }
+
+        public CharacterBase LinkedCharacter => linkedCharacter;
+
         private CharacterBase linkedCharacter;
 
         private float bottomClamp = - 90.0f;
@@ -32,9 +36,9 @@ namespace ProjectSL
         public LayerMask interactionLayer;
         public List<IInteractable> interactables = new List<IInteractable>();
 
-
         private void Awake()
         {
+            Instance = this;
             linkedCharacter = GetComponent<CharacterBase>();
 
             mainHUDUI = UIManager.Singleton.GetUI<MainHUDUI>(UIList.MainHUDUI);
@@ -53,6 +57,8 @@ namespace ProjectSL
 
         private void OnDestroy()
         {
+            Instance = null;
+            
             InputSystem.Singleton.OnClickedAlpha1 -= OnClickedAlpha1;
             InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch -= OnClickedCrouch;
@@ -224,16 +230,8 @@ namespace ProjectSL
         {
             if (interactables.Count > 0 && !linkedCharacter.IsArmed && !linkedCharacter.isChangingWeaponState)
             {
-                linkedCharacter.PickUp();
-
-                // 이걸 여기서 하면 안될거 같은데 잘 모르겠다
                 interactionUI.ExecuteInteract();
             }
-        }
-
-        public void OnExecuteInteraction()
-        {
-            interactionUI.ExecuteInteract();
         }
     }
 }

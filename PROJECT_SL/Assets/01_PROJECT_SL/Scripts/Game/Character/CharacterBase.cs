@@ -83,7 +83,9 @@ namespace ProjectSL
 
         public bool isReloading = false;
         public bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
-        public bool isChangingStateForMovement = false;
+
+        public bool allowCharacterMovement = true;
+        public bool allowCharacterAction = true;
 
         // 캐릭터 스탯 관련
         public float currentHealth;
@@ -93,6 +95,15 @@ namespace ProjectSL
 
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
+
+        public float gravity = -15f;
+        public float terminalVelocity = 50f;
+        public float groundOffset;
+        public float groundCheckRadius = 0.25f;
+        public LayerMask groundLayer;
+
+        [SerializeField] private float verticalVelocity;
+        [SerializeField] private bool isGrounded;
 
         private Animator characterAnimator;
         private CharacterController characterController;
@@ -123,10 +134,11 @@ namespace ProjectSL
         private bool isActiveLeftHandIKRifle;
         private bool isActiveLeftHandIKPistol;
 
+        private DropItem targetPickUpItem;
+
         [SerializeField] private bool isRun = false;
         [SerializeField] private bool isArmed = false;
         [SerializeField] private bool isAiming = false;
-        //[SerializeField] private bool isChangingWeaponState = false;    // left hand IK 잡아주기 위한 bool parameter, true 일 경우 무기 변경/장착/해제 중인 상황
 
         private void Awake()
         {
@@ -158,6 +170,8 @@ namespace ProjectSL
         private void Update()
         {
             UpdateStamina();
+            CheckGround();
+            ApplyGravity();
 
             smoothTargetSpeed = Mathf.Lerp(smoothTargetSpeed, targetSpeed, Time.deltaTime * 10f);
             smoothHorizontal = Mathf.Lerp(smoothHorizontal, movementInput.x, Time.deltaTime * 10f);
@@ -216,7 +230,7 @@ namespace ProjectSL
 
         public void Move(Vector2 input, float yAxisAngle)
         {
-            if (isChangingStateForMovement) return;
+            if (!allowCharacterMovement) return;
             movementInput = input;
             bool isInputSomething = input.sqrMagnitude > 0;
 
@@ -253,8 +267,7 @@ namespace ProjectSL
                 }
             }
 
-            // 중력 아직 미구현
-            //movementInput.y += verticalVelocity;
+            movement.y += verticalVelocity;
             characterController.Move(movement * moveSpeed * Time.deltaTime);
         }
 
@@ -274,6 +287,35 @@ namespace ProjectSL
                 // 해당 방향으로 transform.forward 설정하여 캐릭터 회전
                 transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 10f);
             }
+        }
+
+        public void ApplyGravity()
+        {
+            if (isGrounded)
+            {
+                if (verticalVelocity <= 0f)
+                {
+                    verticalVelocity = -2f;
+                }
+            }
+            else
+            {
+                verticalVelocity += gravity * Time.deltaTime;
+
+                verticalVelocity = Mathf.Clamp(verticalVelocity, -terminalVelocity, Time.deltaTime * 10f);
+            }
+        }
+
+        public void CheckGround()
+        {
+            isGrounded = Physics.CheckSphere(
+                transform.position + (Vector3.up * groundOffset),
+                groundCheckRadius,
+                groundLayer,
+                QueryTriggerInteraction.Ignore);
+
+            // 떨어지는 애니메이션 추가
+            // characterAnimator.SetBool("IsGrounded", isGrounded);
         }
 
         public void SetWeaponEquipState(int weaponType)
@@ -357,12 +399,13 @@ namespace ProjectSL
             }
         }
 
-        public void PickUp()
+        public void PickUp(DropItem targetItem)
         {
             if (isArmed || isChangingWeaponState) return;
 
+            targetPickUpItem = targetItem;
+
             isChangingWeaponState = true;
-            isChangingStateForMovement = true;
             characterAnimator.SetTrigger("Pick Up Trigger");
         }
 
@@ -505,11 +548,16 @@ namespace ProjectSL
         public void OnPickUpComplete()
         {
             isChangingWeaponState = false;
-            isChangingStateForMovement = false;
         }
+
 
         public void OnItemPickUp()
         {
+            if (targetPickUpItem != null)
+            {
+                Destroy(targetPickUpItem.gameObject);
+                targetPickUpItem = null;
+            }
             // 실제 아이템 픽업 실행
             // 필드의 아이템 사라지게 처리
             // 플레이어의 인벤토리에 추가

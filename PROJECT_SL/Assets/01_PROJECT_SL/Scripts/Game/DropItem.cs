@@ -13,10 +13,11 @@ namespace ProjectSL
 
         public string itemName;
 
-        public void Interact()
+        public void Interact(CharacterBase actor)   // actor = Player = LinkedCharacter
         {
+            actor.PickUp(this);
             // TODO : 아이템 인벤토리에 수납
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

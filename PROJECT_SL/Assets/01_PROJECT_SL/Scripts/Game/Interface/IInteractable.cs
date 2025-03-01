@@ -10,6 +10,6 @@ namespace ProjectSL
 
         public Vector3 Position { get; }
 
-        public void Interact();
+        public void Interact(CharacterBase actor);
     }
 }

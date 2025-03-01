@@ -26,7 +26,7 @@ namespace ProjectSL
             RemoveAllInteractionContent();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (createdContents.Count > 0)
             {
@@ -122,7 +122,7 @@ namespace ProjectSL
         {
             if (selectedIndex >= 0 && selectedIndex < createdContents.Count)
             {
-                createdContents[selectedIndex].InteractableData.Interact();
+                createdContents[selectedIndex].InteractableData.Interact(PlayerCharacterController.Instance.LinkedCharacter);
             }
         }
     }
