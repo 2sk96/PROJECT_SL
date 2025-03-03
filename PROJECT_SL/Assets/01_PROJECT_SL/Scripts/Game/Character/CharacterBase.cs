@@ -550,12 +550,14 @@ namespace ProjectSL
             isChangingWeaponState = false;
         }
 
+        public System.Action<DropItem> OnItemPicked;
 
         public void OnItemPickUp()
         {
             if (targetPickUpItem != null)
             {
                 Destroy(targetPickUpItem.gameObject);
+                OnItemPicked?.Invoke(targetPickUpItem);
                 targetPickUpItem = null;
             }
             // 실제 아이템 픽업 실행

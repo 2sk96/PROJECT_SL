@@ -24,6 +24,7 @@ namespace ProjectSL
 
         CrosshairUI,
         InteractionUI,
+        InventoryUI,
 
         POPUP_END,
     }

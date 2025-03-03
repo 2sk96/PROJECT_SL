@@ -52,6 +52,9 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedCrouch += OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload += OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction += OnClickedInteraction;
+            InputSystem.Singleton.OnClickInventory += OnClickInventory;
+
+            LinkedCharacter.OnItemPicked += OnLinkedCharacterItemPicked;
         }
 
 
@@ -64,6 +67,9 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedCrouch -= OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload -= OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction -= OnClickedInteraction;
+            InputSystem.Singleton.OnClickInventory -= OnClickInventory;
+
+            LinkedCharacter.OnItemPicked -= OnLinkedCharacterItemPicked;
         }
 
         private void Update()
@@ -232,6 +238,24 @@ namespace ProjectSL
             {
                 interactionUI.ExecuteInteract();
             }
+        }
+
+        private void OnClickInventory()
+        {
+            var inventoryUI = UIManager.Singleton.GetUI<InventoryUI>(UIList.InventoryUI);
+
+            if (inventoryUI.gameObject.activeSelf)
+            {
+                UIManager.Hide<InventoryUI>(UIList.InventoryUI);
+            }
+            else
+            {
+                UIManager.Show<InventoryUI>(UIList.InventoryUI);
+            }
+        }
+        private void OnLinkedCharacterItemPicked(DropItem item)
+        {
+            UserDataModel.Singleton.AddItemData(item.itemName);
         }
     }
 }

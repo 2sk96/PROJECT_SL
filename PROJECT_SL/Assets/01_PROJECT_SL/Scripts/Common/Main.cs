@@ -46,8 +46,9 @@ namespace ProjectSL
             if (isInitialized) return;
 
             isInitialized = true;
-            
+
             // 시스템 초기화를 수행
+            UserDataModel.Singleton.Initialize();
             UIManager.Singleton.Initialize();
             InputSystem.Singleton.Initialize();
             

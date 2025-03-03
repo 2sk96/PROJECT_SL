@@ -25,6 +25,7 @@ namespace ProjectSL
         public System.Action OnMouseWheelDown;
 
         public System.Action OnClickedInteraction;      // F
+        public System.Action OnClickInventory;          // I
 
         public System.Action OnClickedPauseButton;
 
@@ -75,6 +76,11 @@ namespace ProjectSL
             if (Input.GetKeyDown(KeyCode.F))
             {
                 OnClickedInteraction?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                OnClickInventory?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.BackQuote))

@@ -7950,7 +7950,6 @@ MonoBehaviour:
   leftHandPistolRig: {fileID: 1312812641}
   isReloading: 0
   isChangingWeaponState: 0
-  isChangingStateForMovement: 0
   allowCharacterMovement: 1
   allowCharacterAction: 1
   currentHealth: 0
