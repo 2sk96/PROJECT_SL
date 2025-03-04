@@ -255,7 +255,9 @@ namespace ProjectSL
         }
         private void OnLinkedCharacterItemPicked(DropItem item)
         {
-            UserDataModel.Singleton.AddItemData(item.itemName);
+            string itemName = item.itemName;
+            int itemCount = item.count;
+            UserDataModel.Singleton.AddItemData(item.itemName, itemCount);
         }
     }
 }

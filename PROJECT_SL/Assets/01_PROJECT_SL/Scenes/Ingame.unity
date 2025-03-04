@@ -600,6 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: E_2
+  count: 0
 --- !u!65 &319005335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -719,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: C_2
+  count: 0
 --- !u!65 &337642812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -910,6 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: F_2
+  count: 0
 --- !u!65 &357157850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1029,6 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: D_2
+  count: 0
 --- !u!65 &417887595
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1148,6 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: D
+  count: 0
 --- !u!65 &448332795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1525,6 +1530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: D
+  count: 20
 --- !u!65 &737657174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1659,6 +1665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: B_2
+  count: 4
 --- !u!65 &749883255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1763,6 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: A
+  count: 5
 --- !u!65 &777281545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2069,6 +2077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: F
+  count: 0
 --- !u!65 &891743934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2210,6 +2219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: B
+  count: 10
 --- !u!65 &1082474040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2344,6 +2354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: E
+  count: 0
 --- !u!65 &1134823867
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2448,6 +2459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: E
+  count: 25
 --- !u!65 &1140177242
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2567,6 +2579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: C
+  count: 15
 --- !u!65 &1146756410
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2940,6 +2953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: A
+  count: 1
 --- !u!65 &1290385960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3529,6 +3543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: F
+  count: 30
 --- !u!65 &1654446327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3920,6 +3935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: A_2
+  count: 2
 --- !u!65 &1784407272
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4296,6 +4312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: C
+  count: 5
 --- !u!65 &1999251407
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4415,6 +4432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: B
+  count: 3
 --- !u!65 &2118528988
 BoxCollider:
   m_ObjectHideFlags: 0

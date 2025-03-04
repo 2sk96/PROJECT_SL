@@ -34,7 +34,7 @@ namespace ProjectSL
 
             for (int i = 0; i < inventoryItemDatas.Count; i++)
             {
-                AddItem(inventoryItemDatas[i].itemID, null, inventoryItemDatas[i].itemID, 1);
+                AddItem(inventoryItemDatas[i].itemID, null, inventoryItemDatas[i].itemID, inventoryItemDatas[i].count);
             }
             
         }

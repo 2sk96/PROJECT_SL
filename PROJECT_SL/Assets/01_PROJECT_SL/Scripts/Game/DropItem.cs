@@ -13,6 +13,10 @@ namespace ProjectSL
 
         public string itemName;
 
+        public int count = 1;
+
+        public Item item;
+
         public void Interact(CharacterBase actor)   // actor = Player = LinkedCharacter
         {
             actor.PickUp(this);
