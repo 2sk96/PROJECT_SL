@@ -1,0 +1,20 @@
+﻿{
+    "WeaponDatas": [
+        {
+            "<ItemID>k__BackingField": "Item_Weapon_00001",
+            "<WeaponCategory>k__BackingField": 1,
+            "<BaseDamage>k__BackingField": 5.0,
+            "<FireRate>k__BackingField": 0.1,
+            "<Accuracy>k__BackingField": 70.0,
+            "<MagazineSize>k__BackingField": 30
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Weapon_00002",
+            "<WeaponCategory>k__BackingField": 2,
+            "<BaseDamage>k__BackingField": 10.0,
+            "<FireRate>k__BackingField": 0.5,
+            "<Accuracy>k__BackingField": 90.0,
+            "<MagazineSize>k__BackingField": 7
+        }
+    ]
+}

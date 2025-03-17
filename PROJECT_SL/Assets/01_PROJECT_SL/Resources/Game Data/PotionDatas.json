@@ -1,0 +1,22 @@
+﻿{
+    "PotionDatas": [
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00001",
+            "<PotionCategory>k__BackingField": 0,
+            "<IsPercent>k__BackingField": false,
+            "<HealingValue>k__BackingField": 20
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00002",
+            "<PotionCategory>k__BackingField": 1,
+            "<IsPercent>k__BackingField": false,
+            "<HealingValue>k__BackingField": 60
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00003",
+            "<PotionCategory>k__BackingField": 2,
+            "<IsPercent>k__BackingField": true,
+            "<HealingValue>k__BackingField": 100
+        }
+    ]
+}

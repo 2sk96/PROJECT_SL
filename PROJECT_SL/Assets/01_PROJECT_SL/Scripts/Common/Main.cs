@@ -49,6 +49,7 @@ namespace ProjectSL
 
             // 시스템 초기화를 수행
             UserDataModel.Singleton.Initialize();
+            GameDataModel.Singleton.Initialize();
             UIManager.Singleton.Initialize();
             InputSystem.Singleton.Initialize();
             
