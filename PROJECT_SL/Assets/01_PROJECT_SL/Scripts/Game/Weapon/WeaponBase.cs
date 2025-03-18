@@ -11,14 +11,33 @@ namespace ProjectSL
         public float fireRate;
         public float magazineSize;
         public float currentMagazine;
+        public float baseDamage;
+        public float accuracy;
 
         private float lastFireTime = 0f;
         
         private CharacterBase linkedCharacter;
 
+        public string itemID;
+        public string itemName;
+
         private void Awake()
         {
             linkedCharacter = GetComponentInParent<CharacterBase>();
+
+            if (GameDataModel.Singleton.GetItemData(itemID, out ItemDataDTO.ItemData itemData))
+            {
+                itemName = itemData.ItemName;
+            }
+
+            if (GameDataModel.Singleton.GetWeaponItemData(itemID, out WeaponDataDTO.WeaponData weaponData))
+            {
+                fireRate = weaponData.FireRate;
+                magazineSize = weaponData.MagazineSize;
+                baseDamage = weaponData.BaseDamage;
+                accuracy = weaponData.Accuracy;
+            }
+
             currentMagazine = magazineSize;
         }
 

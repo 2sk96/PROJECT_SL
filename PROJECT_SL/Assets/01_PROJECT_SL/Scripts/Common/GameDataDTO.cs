@@ -10,9 +10,9 @@ namespace ProjectSL
     public enum ItemType
     {
         Potion,
-        Bullet,
         Material,
         Weapon,
+        Bullet,
         Armor,
     }
 

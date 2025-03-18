@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace ProjectSL
 {
-    public enum WeaponType
-    {
-        Rifle=1,
-        Pistol=2,
-    }
+    //public enum WeaponType
+    //{
+    //    Rifle=1,
+    //    Pistol=2,
+    //}
     
     public class PlayerCharacterController : MonoBehaviour
     {
@@ -55,6 +55,12 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickInventory += OnClickInventory;
 
             LinkedCharacter.OnItemPicked += OnLinkedCharacterItemPicked;
+
+            // 임시 코드
+            if (GameDataModel.Singleton.GetItemData("Item_00001", out ItemDataDTO.ItemData result))
+            {
+                ItemSO itemSO = result.GetItemSO();
+            }
         }
 
 
@@ -257,7 +263,8 @@ namespace ProjectSL
         {
             string itemName = item.itemName;
             int itemCount = item.count;
-            UserDataModel.Singleton.AddItemData(item.itemName, itemCount);
+            Sprite sprite = item.sprite;
+            UserDataModel.Singleton.AddItemData(item.itemName, sprite, itemCount);
         }
     }
 }

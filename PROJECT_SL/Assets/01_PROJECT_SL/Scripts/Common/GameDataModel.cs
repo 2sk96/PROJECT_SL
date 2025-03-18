@@ -98,10 +98,28 @@ namespace ProjectSL
             FileManager.WriteFileFromString("Assets/01_PROJECT_SL/Resources/Game Data/BulletDatas.json", bulletDataToJson);
         }
 
-        public bool GetItemData(string itemID, out ItemDataDTO.ItemData result)
+        public bool GetItemData(string itemID, out ItemDataDTO.ItemData itemData)
         {
-            result = ItemData.ItemDatas.Find(x => x.ItemID == itemID);
-            return result != null;
+            itemData = ItemData.ItemDatas.Find(x => x.ItemID == itemID);
+            return itemData != null;
+        }
+
+        public bool GetPotionItemData(string itemID, out PotionDataDTO.PotionData potionData)
+        {
+            potionData = PotionData.PotionDatas.Find(x => x.ItemID == itemID);
+            return potionData != null;
+        }
+
+        public bool GetWeaponItemData(string itemID, out WeaponDataDTO.WeaponData weaponData)
+        {
+            weaponData = WeaponData.WeaponDatas.Find(x => x.ItemID == itemID);
+            return weaponData != null;
+        }
+
+        public bool GetBulletItemData(string itemID, out BulletDataDTO.BulletData bulletData)
+        {
+            bulletData = BulletData.BulletDatas.Find(x => x.ItemID == itemID);
+            return bulletData != null;
         }
     }
 }

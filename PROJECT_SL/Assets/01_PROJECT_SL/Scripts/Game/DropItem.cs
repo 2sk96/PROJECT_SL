@@ -13,10 +13,24 @@ namespace ProjectSL
 
         public string itemName;
 
+        public string itemID;
+
         public int count = 1;
 
-        public Item item;
+        public Sprite sprite;
 
+        private void Awake()
+        {
+            if (GameDataModel.Singleton.GetItemData(itemID, out ItemDataDTO.ItemData itemData))
+            {
+                itemName = itemData.ItemName;
+                ItemSO itemSO = itemData.GetItemSO();
+                if (itemSO != null)
+                {
+                    sprite = itemSO.sprite;
+                }
+            }
+        }
         public void Interact(CharacterBase actor)   // actor = Player = LinkedCharacter
         {
             actor.PickUp(this);

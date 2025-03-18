@@ -34,7 +34,7 @@ namespace ProjectSL
 
             for (int i = 0; i < inventoryItemDatas.Count; i++)
             {
-                AddItem(inventoryItemDatas[i].itemID, null, inventoryItemDatas[i].itemID, inventoryItemDatas[i].count);
+                AddItem(inventoryItemDatas[i].itemID, inventoryItemDatas[i].sprite, inventoryItemDatas[i].itemID, inventoryItemDatas[i].count);
             }
             
         }
@@ -79,7 +79,7 @@ namespace ProjectSL
 
         private void RefreshInventory(UserItemDTO newItemDTO)
         {
-            AddItem(newItemDTO.itemID, null, newItemDTO.itemID, newItemDTO.count);
+            AddItem(newItemDTO.itemID, newItemDTO.sprite, newItemDTO.itemID, newItemDTO.count);
         }
     }
 }

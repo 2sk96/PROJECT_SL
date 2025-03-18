@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createdContents: []
+  selectedIndex: -1
   itemPrefab: {fileID: 4274273180093061977}
   contentsGroup: {fileID: 5598836306104188544}
   playerPosition: {x: 0, y: 0, z: 0}
@@ -381,8 +382,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c04c22bb3f7ce1b409ceaee6769b77b4, type: 2}
+  m_sharedMaterial: {fileID: 3906829012798516729, guid: c04c22bb3f7ce1b409ceaee6769b77b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -499,6 +500,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a5894f9cdc68c46945fd5aba93cd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: {fileID: 2731204834883372464}
   text: {fileID: 1111974998385627895}
   interactionContent: {fileID: 6840564058395483039}

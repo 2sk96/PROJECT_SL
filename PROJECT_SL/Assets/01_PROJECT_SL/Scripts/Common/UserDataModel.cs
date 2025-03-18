@@ -25,7 +25,7 @@ namespace ProjectSL
             // 세이브 파일에 있는 정보를 토대로 각 DTO들을 초기화한다
         }
 
-        public void AddItemData(string itemID, int count = 1)
+        public void AddItemData(string itemID, Sprite sprite, int count = 1)
         {
             // TODO : 기존에 먹은 아이템인가? > 그렇다면 카운트만 증가시킨다
             // TODO : 한번도 안먹은 아이템이면 새로 List에 담아주자
@@ -35,6 +35,7 @@ namespace ProjectSL
             newItemDTO.dtoID = PlayerInventoryData.Items.Count;
             newItemDTO.itemID = itemID;
             newItemDTO.count = count;
+            newItemDTO.sprite = sprite;
 
             // 실제 DTO에 삽입한다
             PlayerInventoryData.Items.Add(newItemDTO);

@@ -18,6 +18,7 @@ namespace ProjectSL
         public int dtoID;       // 아이템 고유의 슬롯 ID 값 > 아이템 종류와 무관하게 아이템 고유의 ID값
         public string itemID;   // GameData에서의 ItemID > 아이템 종류에 따른 ID값
         public int count;
+        public Sprite sprite;
 
     }
 }
