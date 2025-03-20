@@ -7,7 +7,7 @@ namespace ProjectSL
 {
     public class InventoryUI_InfiniteScrollData : InfiniteScrollData
     {
-        public string itemId;
+        public string itemID;
         public Sprite sprite;
         public string itemName;
         public int itemCount;
