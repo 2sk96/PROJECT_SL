@@ -46,17 +46,17 @@ namespace ProjectSL
 
         private void CreateItemData()
         {
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00001", ItemCategory = ItemType.Potion, ItemName = "하급 회복약" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00002", ItemCategory = ItemType.Potion, ItemName = "상급 회복약" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00003", ItemCategory = ItemType.Potion, ItemName = "엘릭서" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Weapon_00001", ItemCategory = ItemType.Weapon, ItemName = "라이플" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Weapon_00002", ItemCategory = ItemType.Weapon, ItemName = "권총" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00001", ItemCategory = ItemType.Weapon, ItemName = "일반 탄환" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00002", ItemCategory = ItemType.Weapon, ItemName = "상급 일반 탄환" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00003", ItemCategory = ItemType.Weapon, ItemName = "최상급 일반 탄환" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00004", ItemCategory = ItemType.Weapon, ItemName = "철갑탄" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00005", ItemCategory = ItemType.Weapon, ItemName = "상급 철갑탄" });
-            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00006", ItemCategory = ItemType.Weapon, ItemName = "최상급 철갑탄" });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00001", ItemCategory = ItemType.Potion, ItemName = "하급 회복약", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00002", ItemCategory = ItemType.Potion, ItemName = "상급 회복약", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Potion_00003", ItemCategory = ItemType.Potion, ItemName = "엘릭서", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Weapon_00001", ItemCategory = ItemType.Weapon, ItemName = "라이플", IsStackable = false });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Weapon_00002", ItemCategory = ItemType.Weapon, ItemName = "권총", IsStackable = false });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00001", ItemCategory = ItemType.Weapon, ItemName = "일반 탄환", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00002", ItemCategory = ItemType.Weapon, ItemName = "상급 일반 탄환", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00003", ItemCategory = ItemType.Weapon, ItemName = "최상급 일반 탄환", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00004", ItemCategory = ItemType.Weapon, ItemName = "철갑탄", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00005", ItemCategory = ItemType.Weapon, ItemName = "상급 철갑탄", IsStackable = true });
+            ItemData.ItemDatas.Add(new ItemDataDTO.ItemData() { ItemID = "Item_Bullet_00006", ItemCategory = ItemType.Weapon, ItemName = "최상급 철갑탄", IsStackable = true });
 
             string toJson = JsonUtility.ToJson(ItemData, true);
 

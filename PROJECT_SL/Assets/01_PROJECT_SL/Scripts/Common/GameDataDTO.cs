@@ -44,7 +44,7 @@ namespace ProjectSL
             [field: SerializeField] public string ItemID { get; set; }
             [field: SerializeField] public ItemType ItemCategory { get; set; }
             [field: SerializeField] public string ItemName { get; set; }
-            [field: SerializeField] public string ItemNameEn { get; set; }
+            [field: SerializeField] public bool IsStackable { get; set; }
 
 
             public ItemSO GetItemSO()

@@ -4,67 +4,133 @@
             "<ItemID>k__BackingField": "Item_Potion_00001",
             "<ItemCategory>k__BackingField": 0,
             "<ItemName>k__BackingField": "하급 회복약",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Potion_00002",
             "<ItemCategory>k__BackingField": 0,
             "<ItemName>k__BackingField": "상급 회복약",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Potion_00003",
             "<ItemCategory>k__BackingField": 0,
             "<ItemName>k__BackingField": "엘릭서",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Weapon_00001",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "라이플",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": false
         },
         {
             "<ItemID>k__BackingField": "Item_Weapon_00002",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "권총",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": false
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00001",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "일반 탄환",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00002",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "상급 일반 탄환",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00003",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "최상급 일반 탄환",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00004",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "철갑탄",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00005",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "상급 철갑탄",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
         },
         {
             "<ItemID>k__BackingField": "Item_Bullet_00006",
-            "<ItemCategory>k__BackingField": 3,
+            "<ItemCategory>k__BackingField": 2,
             "<ItemName>k__BackingField": "최상급 철갑탄",
-            "<ItemNameEn>k__BackingField": ""
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00001",
+            "<ItemCategory>k__BackingField": 0,
+            "<ItemName>k__BackingField": "하급 회복약",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00002",
+            "<ItemCategory>k__BackingField": 0,
+            "<ItemName>k__BackingField": "상급 회복약",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Potion_00003",
+            "<ItemCategory>k__BackingField": 0,
+            "<ItemName>k__BackingField": "엘릭서",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Weapon_00001",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "라이플",
+            "<IsStackable>k__BackingField": false
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Weapon_00002",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "권총",
+            "<IsStackable>k__BackingField": false
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00001",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "일반 탄환",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00002",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "상급 일반 탄환",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00003",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "최상급 일반 탄환",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00004",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "철갑탄",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00005",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "상급 철갑탄",
+            "<IsStackable>k__BackingField": true
+        },
+        {
+            "<ItemID>k__BackingField": "Item_Bullet_00006",
+            "<ItemCategory>k__BackingField": 2,
+            "<ItemName>k__BackingField": "최상급 철갑탄",
+            "<IsStackable>k__BackingField": true
         }
     ]
 }

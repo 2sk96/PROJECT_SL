@@ -265,7 +265,9 @@ namespace ProjectSL
             string itemName = item.itemName;
             int itemCount = item.count;
             Sprite sprite = item.sprite;
-            UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, itemCount);
+            bool isStackable = item.isStackable;
+            //ItemDataDTO.ItemData itemDataDTO = item.dropItemData;
+            UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, isStackable, itemCount);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ProjectSL
     public class DropItem : MonoBehaviour, IInteractable
     {
         public string Message => $"[{itemName}]";
-
+        //public ItemDataDTO.ItemData dropItemData;
         public Vector3 Position => this?this.transform.position:new Vector3();
 
         public string itemName;
@@ -19,11 +19,15 @@ namespace ProjectSL
 
         public Sprite sprite;
 
+        public bool isStackable;
+
         private void Awake()
         {
             if (GameDataModel.Singleton.GetItemData(itemID, out ItemDataDTO.ItemData itemData))
             {
+                //dropItemData = itemData;
                 itemName = itemData.ItemName;
+                isStackable = itemData.IsStackable;
                 ItemSO itemSO = itemData.GetItemSO();
                 if (itemSO != null)
                 {
