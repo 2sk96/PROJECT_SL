@@ -95,8 +95,11 @@ namespace ProjectSL
 
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
+        public float jumpHeight = 2f;
+        public float jumpStaminaCost = 20f;
+        public bool jumpTrigger = false;
 
-        public float gravity = -15f;
+        public float gravity = -9.81f;
         public float terminalVelocity = 50f;
         public float groundOffset;
         public float groundCheckRadius = 0.25f;
@@ -216,7 +219,7 @@ namespace ProjectSL
 
         private void UpdateStamina()
         {
-            if (IsRun)
+            if (IsRun && isGrounded)
             {
                 currentStamina -= runStaminaCost * Time.deltaTime;
             }
@@ -231,6 +234,7 @@ namespace ProjectSL
         public void Move(Vector2 input, float yAxisAngle)
         {
             if (!allowCharacterMovement) return;
+
             movementInput = input;
             bool isInputSomething = input.sqrMagnitude > 0;
 
@@ -255,20 +259,27 @@ namespace ProjectSL
             }
 
             Vector3 movement = Vector3.zero;
-            if (isAiming) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
+            float movementAllowed = characterAnimator.GetFloat("MovementAllowed");
+            if (movementAllowed > 0.95)
             {
-                movement = transform.forward * movementInput.y + transform.right * movementInput.x;
-            }
-            else         // 비무장 상태 에서는 캐릭터가 앞으로만 이동, 캐릭터가 바라보는 방향은 카메라 방향과 무관하게 이동하는 방향을 바라봄
-            {
-                if (isInputSomething)
+                if (isAiming) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
                 {
-                    movement = transform.forward;
+                    movement = transform.forward * movementInput.y + transform.right * movementInput.x;
+                }
+                else         // 비무장 상태 에서는 캐릭터가 앞으로만 이동, 캐릭터가 바라보는 방향은 카메라 방향과 무관하게 이동하는 방향을 바라봄
+                {
+                    if (isInputSomething)
+                    {
+                        movement = transform.forward;
+                    }
                 }
             }
 
-            movement.y += verticalVelocity;
-            characterController.Move(movement * moveSpeed * Time.deltaTime);
+            // moveSpeed 추가
+            movement = movement * moveSpeed * Time.deltaTime;
+            movement.y += verticalVelocity * Time.deltaTime;
+            characterController.Move(movement);
+            //characterController.Move(movement * moveSpeed * Time.deltaTime);
         }
 
         // 무장중일 때만 작동
@@ -293,6 +304,14 @@ namespace ProjectSL
         {
             if (isGrounded)
             {
+                if (jumpTrigger)
+                {
+                    verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                    jumpTrigger = false;
+                    characterAnimator.SetTrigger("Jump Trigger");
+
+                }
+
                 if (verticalVelocity <= 0f)
                 {
                     verticalVelocity = -2f;
@@ -302,7 +321,7 @@ namespace ProjectSL
             {
                 verticalVelocity += gravity * Time.deltaTime;
 
-                verticalVelocity = Mathf.Clamp(verticalVelocity, -terminalVelocity, Time.deltaTime * 10f);
+                //verticalVelocity = Mathf.Clamp(verticalVelocity, -terminalVelocity, Time.deltaTime * 10f);
             }
         }
 
@@ -315,7 +334,7 @@ namespace ProjectSL
                 QueryTriggerInteraction.Ignore);
 
             // 떨어지는 애니메이션 추가
-            // characterAnimator.SetBool("IsGrounded", isGrounded);
+             characterAnimator.SetBool("IsGrounded", isGrounded);
         }
 
         public void SetWeaponEquipState(int weaponType)
@@ -407,6 +426,21 @@ namespace ProjectSL
 
             isChangingWeaponState = true;
             characterAnimator.SetTrigger("Pick Up Trigger");
+        }
+
+
+        public void Jump()
+        {
+            if (isGrounded&&currentStamina>0)
+            {
+                currentStamina -= jumpStaminaCost;
+                jumpTrigger = true;
+            }
+        }
+
+        public void Roll()
+        {
+
         }
 
         private void OnPistolToHand()

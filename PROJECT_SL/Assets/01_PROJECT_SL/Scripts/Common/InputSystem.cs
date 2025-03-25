@@ -14,8 +14,8 @@ namespace ProjectSL
         public bool IsLeftMouseButton => Input.GetMouseButton(0);
         public bool IsRightMouseButton => Input.GetMouseButton(1);
 
-        public System.Action OnClickedSpace;
-        public System.Action OnClickedLeftControl;
+        public System.Action OnClickedSpace;            // Jump
+        public System.Action OnClickedLeftControl;      // Roll
         public System.Action OnClickedCrouch;
         public System.Action OnClickedAlpha1;
         public System.Action OnClickedAlpha2;
@@ -26,8 +26,7 @@ namespace ProjectSL
 
         public System.Action OnClickedInteraction;      // F
         public System.Action OnClickInventory;          // I
-
-        public System.Action OnClickedPauseButton;
+        public System.Action OnClickedPauseButton;      // esc
 
         private bool isInitialized = false;
         

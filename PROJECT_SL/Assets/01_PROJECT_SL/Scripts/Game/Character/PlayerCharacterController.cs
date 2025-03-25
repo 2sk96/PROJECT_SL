@@ -53,6 +53,8 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedReload += OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction += OnClickedInteraction;
             InputSystem.Singleton.OnClickInventory += OnClickInventory;
+            InputSystem.Singleton.OnClickedSpace += OnClickedJump;
+            InputSystem.Singleton.OnClickedLeftControl += OnClickedRoll;
 
             LinkedCharacter.OnItemPicked += OnLinkedCharacterItemPicked;
 
@@ -63,6 +65,7 @@ namespace ProjectSL
             }
         }
 
+        
 
         private void OnDestroy()
         {
@@ -268,6 +271,16 @@ namespace ProjectSL
             bool isStackable = item.isStackable;
             //ItemDataDTO.ItemData itemDataDTO = item.dropItemData;
             UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, isStackable, itemCount);
+        }
+
+        private void OnClickedRoll()
+        {
+            linkedCharacter.Roll();
+        }
+
+        private void OnClickedJump()
+        {
+            linkedCharacter.Jump();
         }
     }
 }
