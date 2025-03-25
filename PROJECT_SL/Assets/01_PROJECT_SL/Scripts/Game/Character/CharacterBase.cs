@@ -95,9 +95,13 @@ namespace ProjectSL
 
         public float walkSpeed = 2.0f;
         public float runSpeed = 7.0f;
+
         public float jumpHeight = 2f;
         public float jumpStaminaCost = 20f;
         public bool jumpTrigger = false;
+
+        public float rollStaminaCost = 20f;
+        public bool rollTrigger = false;
 
         public float gravity = -9.81f;
         public float terminalVelocity = 50f;
@@ -197,7 +201,11 @@ namespace ProjectSL
             aimingRig.weight = Mathf.Lerp(aimingRig.weight, isActiveAimingIK ? 1f : 0f, Time.deltaTime * 10f);
             leftHandRifleRig.weight = Mathf.Lerp(leftHandRifleRig.weight, isActiveLeftHandIKRifle ? 1f : 0f, Time.deltaTime * 10f);
             leftHandPistolRig.weight = Mathf.Lerp(leftHandPistolRig.weight, isActiveLeftHandIKPistol ? 1f : 0f, Time.deltaTime * 10f);
+        }
 
+        private void OnAnimatorMove()
+        {
+            
         }
 
         // isAiming일때
@@ -260,6 +268,7 @@ namespace ProjectSL
 
             Vector3 movement = Vector3.zero;
             float movementAllowed = characterAnimator.GetFloat("MovementAllowed");
+
             if (movementAllowed > 0.95)
             {
                 if (isAiming) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
@@ -321,6 +330,7 @@ namespace ProjectSL
             {
                 verticalVelocity += gravity * Time.deltaTime;
 
+                // 떨어지는 최대 속도를 정해줘야 한다
                 //verticalVelocity = Mathf.Clamp(verticalVelocity, -terminalVelocity, Time.deltaTime * 10f);
             }
         }
@@ -440,7 +450,12 @@ namespace ProjectSL
 
         public void Roll()
         {
-
+            if (isGrounded && currentStamina > 0)
+            {
+                currentStamina -= rollStaminaCost;
+                //rollTrigger = true;
+                characterAnimator.SetTrigger("Roll Trigger");
+            }
         }
 
         private void OnPistolToHand()
