@@ -27,6 +27,19 @@ namespace ProjectSL
             var targetUI = Singleton.GetUI<T>(uiName);
             targetUI.Show();
 
+            if (targetUI.IsCursorVisible)
+            {
+                if (Singleton.activatedCursorUIs.Exists(x => x == targetUI) == false)
+                {
+                    Singleton.activatedCursorUIs.Add(targetUI);
+                }
+            }
+
+            if (Singleton.IsNeedVisibleCursor)
+            {
+                InputSystem.Singleton.IsForceCursorVisible = true;
+            }
+
             return targetUI;
         }
 
@@ -35,8 +48,21 @@ namespace ProjectSL
             var targetUI = Singleton.GetUI<T>(uiName);
             targetUI.Hide();
 
+            if (targetUI.IsCursorVisible)
+            {
+                Singleton.activatedCursorUIs.Remove(targetUI);
+            }
+
+            if (Singleton.IsNeedVisibleCursor == false)
+            {
+                InputSystem.Singleton.IsForceCursorVisible = false;
+            }
+
             return targetUI;
         }
+
+        private List<UIBase> activatedCursorUIs = new List<UIBase>();
+        public bool IsNeedVisibleCursor => Singleton.activatedCursorUIs.Count > 0;
 
         private Dictionary<UIList, UIBase> panelContainer = new Dictionary<UIList, UIBase>();
         private Dictionary<UIList, UIBase> popupContainer = new Dictionary<UIList, UIBase>();

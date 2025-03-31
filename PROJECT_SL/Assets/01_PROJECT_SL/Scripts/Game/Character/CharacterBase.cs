@@ -49,6 +49,11 @@ namespace ProjectSL
                 //characterAnimator.SetBool("IsAiming", true);
             }
         }
+        public bool IsRolling
+        {
+            get => isRolling;
+            set => isRolling = value;
+        }
         public float MoveSpeed => moveSpeed;
         public bool IsAlive => currentHealth > 0f;
         public Transform CameraPivot { get; private set; }
@@ -146,6 +151,7 @@ namespace ProjectSL
         [SerializeField] private bool isRun = false;
         [SerializeField] private bool isArmed = false;
         [SerializeField] private bool isAiming = false;
+        [SerializeField] private bool isRolling = false;
 
         private void Awake()
         {
@@ -201,11 +207,16 @@ namespace ProjectSL
             aimingRig.weight = Mathf.Lerp(aimingRig.weight, isActiveAimingIK ? 1f : 0f, Time.deltaTime * 10f);
             leftHandRifleRig.weight = Mathf.Lerp(leftHandRifleRig.weight, isActiveLeftHandIKRifle ? 1f : 0f, Time.deltaTime * 10f);
             leftHandPistolRig.weight = Mathf.Lerp(leftHandPistolRig.weight, isActiveLeftHandIKPistol ? 1f : 0f, Time.deltaTime * 10f);
+
         }
 
         private void OnAnimatorMove()
         {
-            
+            if (isRolling)
+            {
+                Vector3 deltaPosition = characterAnimator.deltaPosition;
+                characterController.Move(deltaPosition * 0.5f);
+            }
         }
 
         // isAiming일때
@@ -269,7 +280,7 @@ namespace ProjectSL
             Vector3 movement = Vector3.zero;
             float movementAllowed = characterAnimator.GetFloat("MovementAllowed");
 
-            if (movementAllowed > 0.95)
+            if (movementAllowed > 0.95 && !isRolling)
             {
                 if (isAiming) // 무장상태 에서는 캐릭터가 입력 방향에 맞추어 forward / right 방향으로 이동, 캐릭터가 바라보는 방향은 카메라와 동일한 정면
                 {
@@ -452,6 +463,7 @@ namespace ProjectSL
         {
             if (isGrounded && currentStamina > 0)
             {
+                IsRolling = true;
                 currentStamina -= rollStaminaCost;
                 //rollTrigger = true;
                 characterAnimator.SetTrigger("Roll Trigger");

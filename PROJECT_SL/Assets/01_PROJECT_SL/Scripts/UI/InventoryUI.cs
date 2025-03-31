@@ -7,6 +7,8 @@ namespace ProjectSL
 {
     public class InventoryUI : UIBase
     {
+        public override bool IsCursorVisible => true;
+
         [field: SerializeField] public InfiniteScroll infiniteScroll;
 
         public override void Show()

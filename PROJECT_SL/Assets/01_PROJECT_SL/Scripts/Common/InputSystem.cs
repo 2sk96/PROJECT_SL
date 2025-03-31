@@ -2,11 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ProjectSL
 {
     public class InputSystem : SingletonBase<InputSystem>
     {
+        public bool IsForceCursorVisible 
+        {
+            get => isForceCursorVisible;
+            set
+            {
+                isForceCursorVisible = value;
+                SetVisibleCursor(value || Input.GetKey(KeyCode.LeftAlt));
+            }
+        }
+        [field: SerializeField] private bool isForceCursorVisible = false;
+
 
         public Vector2 Movement { get; private set; }
         public Vector2 Look { get; private set; }
@@ -29,7 +41,8 @@ namespace ProjectSL
         public System.Action OnClickedPauseButton;      // esc
 
         private bool isInitialized = false;
-        
+
+
         public void Initialize()
         {
             if (isInitialized) return;
@@ -40,7 +53,14 @@ namespace ProjectSL
 
         private void Update()
         {
-            SetVisibleCursor(Input.GetKey(KeyCode.LeftAlt));
+            // 마우스 포인터가 UI 위에 올라가 있는지 확인하는 방법
+            // EventSystem > 인스펙터에서 디버그 모드 > Standalone Input Module 에 있는 값
+            //bool isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
+            
+            if (!isForceCursorVisible)
+            {
+                SetVisibleCursor(Input.GetKey(KeyCode.LeftAlt));
+            }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -93,7 +113,9 @@ namespace ProjectSL
 
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
-            Look = new Vector2(mouseX, mouseY);
+
+            Look = isForceCursorVisible ? Vector2.zero : new Vector2(mouseX, mouseY);
+            //Look = new Vector2(mouseX, mouseY);
 
             // 마우스 휠을 올렸을 때
             if (Input.mouseScrollDelta.y > 0)
@@ -107,7 +129,7 @@ namespace ProjectSL
             }
         }
 
-        private void SetVisibleCursor(bool isVisible)
+        public void SetVisibleCursor(bool isVisible)
         {
             Cursor.visible = isVisible;
             Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
