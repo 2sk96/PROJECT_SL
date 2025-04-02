@@ -113,6 +113,9 @@ namespace ProjectSL
         public float groundOffset;
         public float groundCheckRadius = 0.25f;
         public LayerMask groundLayer;
+        public float landHarderVerticalVelocity = -10f;
+        public float maxVerticalVelocity = 50f;
+        public float minVerticalVelocity = -50f;
 
         [SerializeField] private float verticalVelocity;
         [SerializeField] private bool isGrounded;
@@ -334,15 +337,21 @@ namespace ProjectSL
 
                 if (verticalVelocity <= 0f)
                 {
+                    if (verticalVelocity < landHarderVerticalVelocity)
+                    {
+                        characterAnimator.SetBool("Land Harder", true);
+                    }
+                    else if (characterAnimator.GetBool("Land Harder"))
+                    {
+                        characterAnimator.SetBool("Land Harder", false);
+                    }
                     verticalVelocity = -2f;
                 }
             }
             else
             {
                 verticalVelocity += gravity * Time.deltaTime;
-
-                // 떨어지는 최대 속도를 정해줘야 한다
-                //verticalVelocity = Mathf.Clamp(verticalVelocity, -terminalVelocity, Time.deltaTime * 10f);
+                verticalVelocity = Mathf.Clamp(verticalVelocity, minVerticalVelocity, maxVerticalVelocity);
             }
         }
 
