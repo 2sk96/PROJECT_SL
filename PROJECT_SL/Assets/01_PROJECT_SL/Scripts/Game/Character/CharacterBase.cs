@@ -472,7 +472,7 @@ namespace ProjectSL
 
         public void Roll()
         {
-            if (!isRolling && isGrounded && currentStamina > 0)
+            if (!isRolling && isGrounded && !isChangingWeaponState && currentStamina > 0)
             {
                 IsRolling = true;
                 currentStamina -= rollStaminaCost;
