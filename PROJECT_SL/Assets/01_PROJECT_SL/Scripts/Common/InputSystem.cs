@@ -42,6 +42,9 @@ namespace ProjectSL
 
         private bool isInitialized = false;
 
+        private float horizontal;
+        private float vertical;
+
 
         public void Initialize()
         {
@@ -107,8 +110,12 @@ namespace ProjectSL
                 OnClickedPauseButton?.Invoke();
             }
 
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            if (!PlayerCharacterController.Instance.LinkedCharacter.fixDirection)
+            {
+                horizontal = Input.GetAxis("Horizontal");
+                vertical = Input.GetAxis("Vertical");
+            }
+
             Movement = new Vector2(horizontal, vertical);
 
             float mouseX = Input.GetAxis("Mouse X");

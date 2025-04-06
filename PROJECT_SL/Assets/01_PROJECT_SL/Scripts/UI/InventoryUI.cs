@@ -95,7 +95,6 @@ namespace ProjectSL
 
         public void UpdateItemAtInventory(UserItemDTO checkItemDTO)
         {
-            Debug.Log("UpdateItemAtInventory");
             List<InfiniteScrollData> currentInfiniteScrollData = infiniteScroll.GetDataList();
             for (int i = 0; i < currentInfiniteScrollData.Count; i++)
             {
@@ -114,8 +113,6 @@ namespace ProjectSL
         // 2. 아이템 추가가 발생했을 때 호출
         private void AddItemToInventory(UserItemDTO newItemDTO)
         {
-            Debug.Log("AddItemToInventory" + newItemDTO.itemName);
-            
             AddItem(newItemDTO.itemID, newItemDTO.itemName, newItemDTO.sprite, newItemDTO.count);
         }
     }

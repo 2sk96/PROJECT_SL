@@ -32,7 +32,7 @@ namespace ProjectSL
             set
             {
                 if (!IsAlive) return;
-
+                
                 isArmed = value;
                 characterAnimator.SetBool("IsArmed", value);
             }
@@ -43,8 +43,10 @@ namespace ProjectSL
             set
             {
                 if (!isArmed) return;
-                isAiming = value;
-                characterAnimator.SetBool("IsAiming", value);
+
+                isAiming = (isRolling) ? false : value;
+                characterAnimator.SetBool("IsAiming", (isRolling) ? false:value);
+
                 //isAiming = true;
                 //characterAnimator.SetBool("IsAiming", true);
             }
@@ -105,8 +107,9 @@ namespace ProjectSL
         public float jumpStaminaCost = 20f;
         public bool jumpTrigger = false;
 
+        public float rollDistance = 1f;
         public float rollStaminaCost = 20f;
-        public bool rollTrigger = false;
+        public bool fixDirection = false;
 
         public float gravity = -9.81f;
         public float terminalVelocity = 50f;
@@ -218,7 +221,7 @@ namespace ProjectSL
             if (isRolling)
             {
                 Vector3 deltaPosition = characterAnimator.deltaPosition;
-                characterController.Move(deltaPosition * 0.5f);
+                characterController.Move(deltaPosition * rollDistance);
             }
         }
 
@@ -235,8 +238,8 @@ namespace ProjectSL
         // 무기 변경/장착/해제 모션을 하고 있지 않을 때
         private void CheckActiveIK_LeftHand()
         {
-            isActiveLeftHandIKRifle = currentWeaponType == (int)WeaponType.Rifle && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
-            isActiveLeftHandIKPistol = currentWeaponType == (int)WeaponType.Pistol && isArmed && IsAlive && !isReloading && !isChangingWeaponState;
+            isActiveLeftHandIKRifle = currentWeaponType == (int)WeaponType.Rifle && isArmed && IsAlive && !isReloading && !isChangingWeaponState &&!isRolling;
+            isActiveLeftHandIKPistol = currentWeaponType == (int)WeaponType.Pistol && isArmed && IsAlive && !isReloading && !isChangingWeaponState && !isRolling;
         }
 
         private void UpdateStamina()
@@ -302,7 +305,6 @@ namespace ProjectSL
             movement = movement * moveSpeed * Time.deltaTime;
             movement.y += verticalVelocity * Time.deltaTime;
             characterController.Move(movement);
-            //characterController.Move(movement * moveSpeed * Time.deltaTime);
         }
 
         // 무장중일 때만 작동
@@ -420,7 +422,7 @@ namespace ProjectSL
 
             float shootingAllowed = characterAnimator.GetFloat("ShootingAllowed");
 
-            if (!isAiming || isReloading || isChangingWeaponState || shootingAllowed < 0.95f) return;
+            if (isRolling || !isAiming || isReloading || isChangingWeaponState || shootingAllowed < 0.95f) return;
 
             if (currentWeaponBase.currentMagazine <= 0)
             {
@@ -433,7 +435,7 @@ namespace ProjectSL
         public void Reload()
         {
             // 총기 사용 중 재장전을 할 때 실행될 스크립트
-            if (!IsArmed || isChangingWeaponState) return;
+            if (isRolling || !IsArmed || isChangingWeaponState) return;
 
             if (!isArmed)
             {
@@ -450,7 +452,7 @@ namespace ProjectSL
 
         public void PickUp(DropItem targetItem)
         {
-            if (isArmed || isChangingWeaponState) return;
+            if (isArmed || isRolling || isChangingWeaponState) return;
 
             targetPickUpItem = targetItem;
 
@@ -461,7 +463,7 @@ namespace ProjectSL
 
         public void Jump()
         {
-            if (isGrounded&&currentStamina>0)
+            if (isGrounded && !isRolling && currentStamina>0)
             {
                 currentStamina -= jumpStaminaCost;
                 jumpTrigger = true;
@@ -470,12 +472,12 @@ namespace ProjectSL
 
         public void Roll()
         {
-            if (isGrounded && currentStamina > 0)
+            if (!isRolling && isGrounded && currentStamina > 0)
             {
                 IsRolling = true;
                 currentStamina -= rollStaminaCost;
-                //rollTrigger = true;
                 characterAnimator.SetTrigger("Roll Trigger");
+                fixDirection = true;
             }
         }
 
