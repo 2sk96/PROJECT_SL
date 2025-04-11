@@ -16,6 +16,12 @@ namespace ProjectSL
         Armor,
     }
 
+    public enum InventoryType
+    {
+        Consumable,
+        Equipment
+    }
+
     public enum PotionType
     {
         Lesser,
@@ -43,8 +49,10 @@ namespace ProjectSL
         {
             [field: SerializeField] public string ItemID { get; set; }
             [field: SerializeField] public ItemType ItemCategory { get; set; }
+            [field: SerializeField] public InventoryType InventoryCategory { get; set; }
             [field: SerializeField] public string ItemName { get; set; }
             [field: SerializeField] public bool IsStackable { get; set; }
+            [field: SerializeField] public bool IsCraftable { get; set; }
 
 
             public ItemSO GetItemSO()
@@ -114,6 +122,26 @@ namespace ProjectSL
         }
 
         public List<BulletData> BulletDatas = new List<BulletData>();
+    }
+
+    public class CraftingDataDTO : GameDataDTO
+    {
+        [System.Serializable]
+        public class RecipeData
+        {
+            public string itemID;
+            public int quantity;
+        }
+
+        [System.Serializable]
+        public class CraftingData
+        {
+            public string TargetItemID;
+            // Dictionary<ItemID, ItemCount>
+            public List<RecipeData> RecipeList;
+        }
+
+        public List<CraftingData> CraftingDatas = new List<CraftingData>();
     }
 
 }

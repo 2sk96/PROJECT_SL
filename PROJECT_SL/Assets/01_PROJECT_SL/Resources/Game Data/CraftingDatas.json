@@ -1,0 +1,104 @@
+﻿{
+    "CraftingDatas": [
+        {
+            "TargetItemID": "Item_Potion_00001",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Material_00001",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Potion_00002",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Potion_00001",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00002",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Potion_00003",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Potion_00002",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00003",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Bullet_00002",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Bullet_00001",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00004",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Bullet_00003",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Bullet_00001",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00005",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Bullet_00004",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Bullet_00001",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00006",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Bullet_00005",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Bullet_00004",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00004",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "TargetItemID": "Item_Bullet_00006",
+            "RecipeList": [
+                {
+                    "itemID": "Item_Bullet_00004",
+                    "quantity": 1
+                },
+                {
+                    "itemID": "Item_Material_00005",
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}
