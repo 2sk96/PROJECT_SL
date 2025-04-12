@@ -718,6 +718,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &319005335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -841,6 +848,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &337642812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1036,6 +1050,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &357157850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1164,6 +1185,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &417887595
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1297,6 +1325,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &448332795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1822,6 +1857,13 @@ MonoBehaviour:
   count: 4
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &749883255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2174,6 +2216,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &891743934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2411,6 +2460,13 @@ MonoBehaviour:
   count: 0
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &1134823867
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2835,6 +2891,13 @@ MonoBehaviour:
   count: 1
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &1290385960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4167,6 +4230,13 @@ MonoBehaviour:
   count: 1
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &1784407272
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4728,6 +4798,13 @@ MonoBehaviour:
   count: 5
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &1999251407
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4856,6 +4933,13 @@ MonoBehaviour:
   count: 3
   sprite: {fileID: 0}
   isStackable: 0
+  dropItemData:
+    <ItemID>k__BackingField: 
+    <ItemCategory>k__BackingField: 0
+    <InventoryCategory>k__BackingField: 0
+    <ItemName>k__BackingField: 
+    <IsStackable>k__BackingField: 0
+    <IsCraftable>k__BackingField: 0
 --- !u!65 &2118528988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8393,7 +8477,6 @@ MonoBehaviour:
   isChangingWeaponState: 0
   allowCharacterMovement: 1
   allowCharacterAction: 1
-  allowCharacterRoll: 1
   currentHealth: 0
   currentStamina: 0
   maxStamina: 100
@@ -8405,7 +8488,7 @@ MonoBehaviour:
   jumpTrigger: 0
   rollDistance: 1
   rollStaminaCost: 20
-  rollTrigger: 0
+  fixDirection: 0
   gravity: -9.81
   terminalVelocity: 50
   groundOffset: 0
