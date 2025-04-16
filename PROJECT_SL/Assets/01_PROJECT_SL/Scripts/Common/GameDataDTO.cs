@@ -124,6 +124,7 @@ namespace ProjectSL
         public List<BulletData> BulletDatas = new List<BulletData>();
     }
 
+    [System.Serializable]
     public class CraftingDataDTO : GameDataDTO
     {
         [System.Serializable]
@@ -137,7 +138,6 @@ namespace ProjectSL
         public class CraftingData
         {
             public string TargetItemID;
-            // Dictionary<ItemID, ItemCount>
             public List<RecipeData> RecipeList;
         }
 
