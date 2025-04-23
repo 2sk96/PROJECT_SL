@@ -18,6 +18,13 @@ namespace ProjectSL
 
         public CharacterBase LinkedCharacter => linkedCharacter;
 
+        public MainHUDUI mainHUDUI;
+        public InteractionUI interactionUI;
+
+        public float interactionRadius = 2f;
+        public LayerMask interactionLayer;
+        public List<IInteractable> interactables = new List<IInteractable>();
+
         private CharacterBase linkedCharacter;
 
         private float bottomClamp = - 90.0f;
@@ -26,16 +33,12 @@ namespace ProjectSL
         private float threshold = 0.01f;
         private float targetYaw;
         private float targetPitch;
+        
+        [SerializeField] private float recoilRecoverySpeed = 2f; // 카메라 회복 속도
+        private Vector3 currentRotation;
+        private Vector3 targetRotation;
 
         private List<IInteractable> prevInteractables = new List<IInteractable>();
-
-        public MainHUDUI mainHUDUI;
-        public InteractionUI interactionUI;
-
-        public float interactionRadius = 2f;
-        public LayerMask interactionLayer;
-        public List<IInteractable> interactables = new List<IInteractable>();
-
         private void Awake()
         {
             Instance = this;
@@ -124,6 +127,7 @@ namespace ProjectSL
         {
             if (!linkedCharacter.IsAlive) return;
             CameraRotation();
+            CameraRecovery();
         }
 
         private void ShowCrosshair(bool isRightMouseButtonClicked)
@@ -211,7 +215,7 @@ namespace ProjectSL
             targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
             targetPitch = ClampAngle(targetPitch, bottomClamp, topClamp);
 
-            linkedCharacter.CameraPivot.rotation = Quaternion.Euler(targetPitch, targetYaw, 0f);
+            linkedCharacter.CameraPivot.rotation = Quaternion.Euler(targetPitch + currentRotation.x, targetYaw + currentRotation.y, 0f);
         }
 
         // 각도가 0~360도 이내로만 존재할 수 있도록 보정해 주는 함수
@@ -220,6 +224,20 @@ namespace ProjectSL
             if (angle < -360f) angle += 360f;
             if (angle > 360f) angle -= 360f;
             return Mathf.Clamp(angle, min, max);
+        }
+
+
+        public void CameraRecoil(float recoilAmount, float vertical = 2f, float horizontal = 1f)
+        {
+            float xRecoil = -vertical * recoilAmount;
+            float yRecoil = UnityEngine.Random.Range(-horizontal, horizontal) * recoilAmount;
+            targetRotation += new Vector3(xRecoil, yRecoil, 0f);
+        }
+
+        public void CameraRecovery()
+        {
+            targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, Time.deltaTime * recoilRecoverySpeed);
+            currentRotation = Vector3.Lerp(currentRotation, targetRotation, Time.deltaTime * recoilRecoverySpeed);
         }
 
         private void OnClickedAlpha1()

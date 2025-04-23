@@ -5,7 +5,8 @@
             "<WeaponCategory>k__BackingField": 1,
             "<BaseDamage>k__BackingField": 5.0,
             "<FireRate>k__BackingField": 0.10000000149011612,
-            "<Accuracy>k__BackingField": 70.0,
+            "<Accuracy>k__BackingField": 80.0,
+            "<Recoil>k__BackingField": 10.0,
             "<MagazineSize>k__BackingField": 30
         },
         {
@@ -13,7 +14,8 @@
             "<WeaponCategory>k__BackingField": 2,
             "<BaseDamage>k__BackingField": 10.0,
             "<FireRate>k__BackingField": 0.5,
-            "<Accuracy>k__BackingField": 90.0,
+            "<Accuracy>k__BackingField": 95.0,
+            "<Recoil>k__BackingField": 50.0,
             "<MagazineSize>k__BackingField": 7
         }
     ]

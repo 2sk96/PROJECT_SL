@@ -55,8 +55,8 @@ namespace ProjectSL
 
         private void CreateWeaponData()
         {
-            WeaponData.WeaponDatas.Add(new WeaponDataDTO.WeaponData() { ItemID = "Item_Weapon_00001", WeaponCategory = WeaponType.Rifle, BaseDamage = 5, FireRate = 0.1f, Accuracy = 70, MagazineSize = 30 });
-            WeaponData.WeaponDatas.Add(new WeaponDataDTO.WeaponData() { ItemID = "Item_Weapon_00002", WeaponCategory = WeaponType.Pistol, BaseDamage = 10, FireRate = 0.5f, Accuracy = 90, MagazineSize = 7 });
+            WeaponData.WeaponDatas.Add(new WeaponDataDTO.WeaponData() { ItemID = "Item_Weapon_00001", WeaponCategory = WeaponType.Rifle, BaseDamage = 5, FireRate = 0.1f, Accuracy = 80, Recoil = 10, MagazineSize = 30 });
+            WeaponData.WeaponDatas.Add(new WeaponDataDTO.WeaponData() { ItemID = "Item_Weapon_00002", WeaponCategory = WeaponType.Pistol, BaseDamage = 10, FireRate = 0.5f, Accuracy = 95, Recoil = 50, MagazineSize = 7 });
 
             string weaponDataToJson = JsonUtility.ToJson(WeaponData, true);
 

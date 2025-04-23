@@ -100,6 +100,7 @@ namespace ProjectSL
             [field: SerializeField] public float BaseDamage { get; set; }
             [field: SerializeField] public float FireRate { get; set; }
             [field: SerializeField] public float Accuracy { get; set; }
+            [field: SerializeField] public float Recoil { get; set; }
             [field: SerializeField] public int MagazineSize {  get; set; }
 
         }

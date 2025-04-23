@@ -76,5 +76,23 @@ namespace ProjectSL
             bulletData = BulletData.BulletDatas.Find(x => x.ItemID == itemID);
             return bulletData != null;
         }
+
+        // 데이터의 accuracy 값으로부터 해당 정확도일 때 생기는 오차 각도에 맞는 spreadAmount 계산 후 return
+        public float GetWeaponAccuracy(float accuracy, float maxSpreadAngle = 10f)
+        {
+            float spreadAngle = (-maxSpreadAngle/100) * accuracy + maxSpreadAngle;
+            float spreadAmount = Mathf.Sin(spreadAngle * Mathf.Deg2Rad);
+            return spreadAmount;
+        }
+
+        //public float GetWeaponRecoilAmount(float recoil)
+        //{
+
+        //}
+
+        //public float GetWeaponRecoilRecoverySpeed(float recoil)
+        //{
+
+        //}
     }
 }

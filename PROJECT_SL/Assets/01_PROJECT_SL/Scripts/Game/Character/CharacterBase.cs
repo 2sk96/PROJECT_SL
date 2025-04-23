@@ -8,6 +8,8 @@ namespace ProjectSL
 {
     public class CharacterBase : MonoBehaviour
     {
+        public bool isPlayer;
+        
         public bool IsRun
         {
             get => isRun;
@@ -57,7 +59,9 @@ namespace ProjectSL
             set => isRolling = value;
         }
         public float MoveSpeed => moveSpeed;
+        public float TargetSpeed => targetSpeed;
         public bool IsAlive => currentHealth > 0f;
+        public bool IsGrounded => isGrounded;
         public Transform CameraPivot { get; private set; }
 
         // 총 관련
