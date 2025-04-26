@@ -84,10 +84,18 @@ namespace ProjectSL
 
         private void CreateCraftableData()
         {
-            CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData() { TargetItemID = "Item_Potion_00001", RecipeList = new List<CraftingDataDTO.RecipeData> { new CraftingDataDTO.RecipeData { itemID = "Item_Material_00001", quantity = 1 } } });
+            CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData() 
+            { 
+                TargetItemID = "Item_Potion_00001", 
+                TargetItemCount = 1,
+                RecipeList = new List<CraftingDataDTO.RecipeData> { 
+                    new CraftingDataDTO.RecipeData { itemID = "Item_Material_00001", quantity = 1 } 
+                } 
+            });
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Potion_00002",
+                TargetItemCount = 1,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
                 new CraftingDataDTO.RecipeData { itemID = "Item_Potion_00001", quantity = 1 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00002", quantity = 1 }
@@ -96,6 +104,7 @@ namespace ProjectSL
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Potion_00003",
+                TargetItemCount = 1,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
                 new CraftingDataDTO.RecipeData { itemID = "Item_Potion_00002", quantity = 1 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00003", quantity = 1 }
@@ -104,40 +113,45 @@ namespace ProjectSL
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Bullet_00002",
+                TargetItemCount = 10,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
-                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 1 },
+                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 10 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00004", quantity = 1 }
                 }
             });
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Bullet_00003",
+                TargetItemCount = 10,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
-                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 1 },
+                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 10 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00005", quantity = 1 }
                 }
             });
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Bullet_00004",
+                TargetItemCount = 10,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
-                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 1 },
+                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00001", quantity = 10 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00006", quantity = 1 }
                 }
             });
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Bullet_00005",
+                TargetItemCount = 10,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
-                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00004", quantity = 1 },
+                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00004", quantity = 10 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00004", quantity = 1 }
                 }
             });
             CraftingData.CraftingDatas.Add(new CraftingDataDTO.CraftingData()
             {
                 TargetItemID = "Item_Bullet_00006",
+                TargetItemCount = 10,
                 RecipeList = new List<CraftingDataDTO.RecipeData> {
-                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00004", quantity = 1 },
+                new CraftingDataDTO.RecipeData { itemID = "Item_Bullet_00004", quantity = 10 },
                 new CraftingDataDTO.RecipeData { itemID = "Item_Material_00005", quantity = 1 }
                 }
             });

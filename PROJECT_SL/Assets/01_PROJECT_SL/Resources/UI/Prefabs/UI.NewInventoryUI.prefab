@@ -1174,8 +1174,9 @@ GameObject:
   - component: {fileID: 7776660774495995785}
   - component: {fileID: 1328853871702810726}
   - component: {fileID: 5703717753281518449}
+  - component: {fileID: 2154870278467578984}
   m_Layer: 5
-  m_Name: UI.NewInventoryUI [Toggle]
+  m_Name: UI.NewInventoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1264,6 +1265,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 1079
+--- !u!114 &2154870278467578984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191099865477369045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfeda6638e57a244b0412b4d29ce509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleController: {fileID: 4341916494260912751}
 --- !u!1 &4518887257730115790
 GameObject:
   m_ObjectHideFlags: 0

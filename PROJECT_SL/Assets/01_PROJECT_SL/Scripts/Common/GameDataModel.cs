@@ -85,6 +85,13 @@ namespace ProjectSL
             return spreadAmount;
         }
 
+        public InventoryType GetItemInventoryCategory(string itemID)
+        {
+            ItemDataDTO.ItemData itemData = ItemData.ItemDatas.Find(x => x.ItemID == itemID);
+            InventoryType inventoryCategory = itemData.InventoryCategory;
+            return inventoryCategory;
+        }
+
         //public float GetWeaponRecoilAmount(float recoil)
         //{
 

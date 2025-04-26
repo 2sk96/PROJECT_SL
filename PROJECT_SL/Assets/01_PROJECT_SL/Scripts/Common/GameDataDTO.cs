@@ -139,6 +139,7 @@ namespace ProjectSL
         public class CraftingData
         {
             public string TargetItemID;
+            public int TargetItemCount;
             public List<RecipeData> RecipeList;
         }
 

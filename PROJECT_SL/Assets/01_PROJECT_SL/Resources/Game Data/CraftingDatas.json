@@ -2,6 +2,7 @@
     "CraftingDatas": [
         {
             "TargetItemID": "Item_Potion_00001",
+            "TargetItemCount": 1,
             "RecipeList": [
                 {
                     "itemID": "Item_Material_00001",
@@ -11,6 +12,7 @@
         },
         {
             "TargetItemID": "Item_Potion_00002",
+            "TargetItemCount": 1,
             "RecipeList": [
                 {
                     "itemID": "Item_Potion_00001",
@@ -24,6 +26,7 @@
         },
         {
             "TargetItemID": "Item_Potion_00003",
+            "TargetItemCount": 1,
             "RecipeList": [
                 {
                     "itemID": "Item_Potion_00002",
@@ -37,10 +40,11 @@
         },
         {
             "TargetItemID": "Item_Bullet_00002",
+            "TargetItemCount": 10,
             "RecipeList": [
                 {
                     "itemID": "Item_Bullet_00001",
-                    "quantity": 1
+                    "quantity": 10
                 },
                 {
                     "itemID": "Item_Material_00004",
@@ -50,10 +54,11 @@
         },
         {
             "TargetItemID": "Item_Bullet_00003",
+            "TargetItemCount": 10,
             "RecipeList": [
                 {
                     "itemID": "Item_Bullet_00001",
-                    "quantity": 1
+                    "quantity": 10
                 },
                 {
                     "itemID": "Item_Material_00005",
@@ -63,10 +68,11 @@
         },
         {
             "TargetItemID": "Item_Bullet_00004",
+            "TargetItemCount": 10,
             "RecipeList": [
                 {
                     "itemID": "Item_Bullet_00001",
-                    "quantity": 1
+                    "quantity": 10
                 },
                 {
                     "itemID": "Item_Material_00006",
@@ -76,10 +82,11 @@
         },
         {
             "TargetItemID": "Item_Bullet_00005",
+            "TargetItemCount": 10,
             "RecipeList": [
                 {
                     "itemID": "Item_Bullet_00004",
-                    "quantity": 1
+                    "quantity": 10
                 },
                 {
                     "itemID": "Item_Material_00004",
@@ -89,10 +96,11 @@
         },
         {
             "TargetItemID": "Item_Bullet_00006",
+            "TargetItemCount": 10,
             "RecipeList": [
                 {
                     "itemID": "Item_Bullet_00004",
-                    "quantity": 1
+                    "quantity": 10
                 },
                 {
                     "itemID": "Item_Material_00005",

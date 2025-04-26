@@ -38,6 +38,7 @@ namespace ProjectSL
 
         public System.Action OnClickedInteraction;      // F
         public System.Action OnClickInventory;          // I
+        public System.Action OnClickInventoryTemp;      // O
         public System.Action OnClickedPauseButton;      // esc
 
         private bool isInitialized = false;
@@ -103,6 +104,11 @@ namespace ProjectSL
             if (Input.GetKeyDown(KeyCode.I))
             {
                 OnClickInventory?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                OnClickInventoryTemp?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.BackQuote))

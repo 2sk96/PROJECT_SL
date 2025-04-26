@@ -56,6 +56,8 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedReload += OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction += OnClickedInteraction;
             InputSystem.Singleton.OnClickInventory += OnClickInventory;
+            InputSystem.Singleton.OnClickInventoryTemp += OnClickInventoryTemp;
+
             InputSystem.Singleton.OnClickedSpace += OnClickedJump;
             InputSystem.Singleton.OnClickedLeftControl += OnClickedRoll;
 
@@ -80,6 +82,10 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedReload -= OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction -= OnClickedInteraction;
             InputSystem.Singleton.OnClickInventory -= OnClickInventory;
+            InputSystem.Singleton.OnClickInventoryTemp -= OnClickInventoryTemp;
+
+            InputSystem.Singleton.OnClickedSpace -= OnClickedJump;
+            InputSystem.Singleton.OnClickedLeftControl -= OnClickedRoll;
 
             LinkedCharacter.OnItemPicked -= OnLinkedCharacterItemPicked;
         }
@@ -267,7 +273,24 @@ namespace ProjectSL
             }
         }
 
+        // NewInventoryUI
         private void OnClickInventory()
+        {
+            var inventoryUI = UIManager.Singleton.GetUI<NewInventoryUI>(UIList.NewInventoryUI);
+
+            if (inventoryUI.gameObject.activeSelf)
+            {
+                UIManager.Hide<NewInventoryUI>(UIList.NewInventoryUI);
+            }
+            else
+            {
+                UIManager.Show<NewInventoryUI>(UIList.NewInventoryUI);
+            }
+        }
+
+        // 기존 InventoryUI
+        // 임시로 일단 남겨둠
+        private void OnClickInventoryTemp()
         {
             var inventoryUI = UIManager.Singleton.GetUI<InventoryUI>(UIList.InventoryUI);
 
@@ -280,15 +303,22 @@ namespace ProjectSL
                 UIManager.Show<InventoryUI>(UIList.InventoryUI);
             }
         }
+
+        // CharcterBase 에서 아이템이 실제로 줏어졌을 때 실행
         private void OnLinkedCharacterItemPicked(DropItem item)
         {
+            ItemDataDTO.ItemData itemData = item.dropItemData;
+            
             string itemID = item.itemID;
             string itemName = item.itemName;
             int itemCount = item.count;
             Sprite sprite = item.sprite;
             bool isStackable = item.isStackable;
-            //ItemDataDTO.ItemData itemDataDTO = item.dropItemData;
-            UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, isStackable, itemCount);
+
+            //UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, isStackable, itemCount);
+
+            UserDataModel.Singleton.AddItemData2(itemData, itemCount);
+
         }
 
         private void OnClickedRoll()

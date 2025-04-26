@@ -23,7 +23,15 @@ namespace ProjectSL
         public override void UpdateData(InfiniteScrollData scrollData)
         {
             var data = scrollData as InventoryUI_InfiniteScrollData;
-            SetData(data.sprite, data.itemName, data.itemCount);
+            string itemName = "";
+            Sprite InventorySprite = null;
+            if (GameDataModel.Singleton.GetItemData(data.itemID, out ItemDataDTO.ItemData result))
+            {
+                itemName = result.ItemName;
+                ItemSO itemSO = result.GetItemSO();
+                InventorySprite = itemSO.sprite;
+            }
+            SetData(InventorySprite, itemName, data.itemCount);
         }
     }
 }

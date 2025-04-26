@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 namespace ProjectSL
 {
-    
-    
+    public enum TabContentType
+    {
+        Consumable,
+        Equipment,
+        Crafting,
+    };
+
     public class ToggleControllerUI : MonoBehaviour
     {
-        private enum TabContentType
-        {
-            Consumable,
-            Equipment,
-            Crafting,
-        };
+        
 
         [SerializeField] private Toggle consumableTab;
         [SerializeField] private Toggle equipmentTab;
@@ -24,7 +24,7 @@ namespace ProjectSL
         [SerializeField] private GameObject equipmentContent;
         [SerializeField] private GameObject craftingContent;
 
-        private TabContentType currentActiveTabContent = TabContentType.Consumable;
+        public TabContentType currentActiveTabContent = TabContentType.Consumable;
 
         private void Awake()
         {

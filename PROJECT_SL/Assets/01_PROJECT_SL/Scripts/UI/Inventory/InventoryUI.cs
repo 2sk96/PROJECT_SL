@@ -50,7 +50,7 @@ namespace ProjectSL
 
             for (int i = 0; i < inventoryItemDatas.Count; i++)
             {
-                AddItem(inventoryItemDatas[i].itemID, inventoryItemDatas[i].itemName, inventoryItemDatas[i].sprite, inventoryItemDatas[i].count);
+                AddItem(inventoryItemDatas[i].itemID, inventoryItemDatas[i].count);
             }
             
         }
@@ -64,12 +64,10 @@ namespace ProjectSL
         //    }
         //}
 
-        public void AddItem(string itemID, string itemName, Sprite sprite, int count)
+        public void AddItem(string itemID, int count)
         {
             var newInfiniteData = new InventoryUI_InfiniteScrollData();
             newInfiniteData.itemID = itemID;
-            newInfiniteData.sprite = sprite;
-            newInfiniteData.itemName = itemName;
             newInfiniteData.itemCount = count;
             
             infiniteScroll.InsertData(newInfiniteData);
@@ -113,7 +111,7 @@ namespace ProjectSL
         // 2. 아이템 추가가 발생했을 때 호출
         private void AddItemToInventory(UserItemDTO newItemDTO)
         {
-            AddItem(newItemDTO.itemID, newItemDTO.itemName, newItemDTO.sprite, newItemDTO.count);
+            AddItem(newItemDTO.itemID, newItemDTO.count);
         }
     }
 }

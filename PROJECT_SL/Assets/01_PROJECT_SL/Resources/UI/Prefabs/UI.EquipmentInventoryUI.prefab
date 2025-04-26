@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2948107906091820046}
-  - component: {fileID: -4947383883738717493}
+  - component: {fileID: 6826795788842792576}
   m_Layer: 5
-  m_Name: UI.EquipmentInventoryUITemp
+  m_Name: UI.EquipmentInventoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-4947383883738717493
+--- !u!114 &6826795788842792576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,9 +46,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1462520795851219099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e875ee39f0c15248a2fc6eec02d1836, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ea3ce5650bbf3c4db02fdd5a8aa5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
+  infiniteScroll: {fileID: 6546814377205588019}
 --- !u!1 &1855228172142019443
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3763572511180658588}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999774
+  m_Size: 0.6385886
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -486,7 +488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000024461016}
+  m_AnchoredPosition: {x: 0, y: 0.040562104}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6310240188436592437
