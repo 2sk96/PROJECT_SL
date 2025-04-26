@@ -9,7 +9,6 @@ namespace ProjectSL
     public class CharacterBase : MonoBehaviour
     {
         public bool isPlayer;
-        
         public bool IsRun
         {
             get => isRun;
@@ -26,8 +25,6 @@ namespace ProjectSL
             }
         }
         [field: SerializeField] public bool IsCrouch { get; set; } = false;
-
-
         public bool IsArmed
         {
             get => isArmed;
@@ -123,6 +120,8 @@ namespace ProjectSL
         public float landHarderVerticalVelocity = -10f;
         public float maxVerticalVelocity = 50f;
         public float minVerticalVelocity = -50f;
+
+        public System.Action<DropItem> OnItemPicked;
 
         [SerializeField] private float verticalVelocity;
         [SerializeField] private bool isGrounded;
@@ -626,8 +625,8 @@ namespace ProjectSL
             isChangingWeaponState = false;
         }
 
-        public System.Action<DropItem> OnItemPicked;
 
+        // PickUp 모션 실행중 아이템이 손에 닿았을 때 실행될 이벤트
         public void OnItemPickUp()
         {
             if (targetPickUpItem != null)
@@ -637,8 +636,8 @@ namespace ProjectSL
                 targetPickUpItem = null;
             }
             // 실제 아이템 픽업 실행
-            // 필드의 아이템 사라지게 처리
-            // 플레이어의 인벤토리에 추가
+            // 1. 필드의 아이템 사라지게 처리
+            // 2. 플레이어의 인벤토리에 추가
         }
 
         private void OnReloadEnd()
