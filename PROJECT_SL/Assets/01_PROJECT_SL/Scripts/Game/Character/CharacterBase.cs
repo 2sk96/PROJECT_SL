@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 namespace ProjectSL
 {
-    public class CharacterBase : MonoBehaviour
+    public class CharacterBase : MonoBehaviour, IDamage
     {
         public bool isPlayer;
         public bool IsRun
@@ -122,6 +122,8 @@ namespace ProjectSL
         public float minVerticalVelocity = -50f;
 
         public System.Action<DropItem> OnItemPicked;
+        public System.Action OnDamageTaken;
+        public System.Action OnPlayerCharacterDeath;
 
         [SerializeField] private float verticalVelocity;
         [SerializeField] private bool isGrounded;
@@ -646,6 +648,23 @@ namespace ProjectSL
             isChangingWeaponState = false;
             isReloading = false;
             currentWeaponBase.Reload();
+        }
+
+        public void TakeDamage(float damage)
+        {
+            OnDamageTaken?.Invoke();
+
+            if (currentHealth > 0)
+            {
+                currentHealth -= damage;
+
+                if (currentHealth <= 0)
+                {
+                    // 아직 모션 추가 안됨
+                    //characterAnimator.SetTrigger("Death Trigger");
+                    OnPlayerCharacterDeath?.Invoke();
+                }
+            }
         }
     }
 }

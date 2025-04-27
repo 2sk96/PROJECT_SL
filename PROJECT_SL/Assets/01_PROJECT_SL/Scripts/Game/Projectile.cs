@@ -38,7 +38,12 @@ namespace ProjectSL
             }
 
             // IDamage Interface 상속 확인 후 
-            if (collision.rigidbody && collision.rigidbody.TryGetComponent(out IDamage damageInterface))
+            //if (collision.rigidbody && collision.rigidbody.TryGetComponent(out IDamage damageInterface))
+            //{
+            //    damageInterface.TakeDamage(damage);
+            //}
+            // 캐릭터는 rigidbody 가 없어서 일단 수정
+            if (collision.gameObject && collision.gameObject.TryGetComponent(out IDamage damageInterface))
             {
                 damageInterface.TakeDamage(damage);
             }

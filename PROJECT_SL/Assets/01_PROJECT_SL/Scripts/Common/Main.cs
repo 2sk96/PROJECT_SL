@@ -61,6 +61,7 @@ namespace ProjectSL
 
         public void ChangeScene(SceneType sceneType, bool isForceLoad = false, System.Action onSceneChangeCompletedCallback = null)
         {
+            UIManager.Singleton.HideAllPopupUIs();
             // 이미 씬이 변경중일 경우 return
             if (IsProgressSceneChanging)
             {

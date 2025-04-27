@@ -50,7 +50,7 @@ namespace ProjectSL
             }
 
             currentMagazine = magazineSize;
-            if (linkedCharacter.isPlayer)
+            if (linkedCharacter != null && linkedCharacter.isPlayer)
             {
                 crosshairUI = UIManager.Singleton.GetUI<CrosshairUI>(UIList.CrosshairUI);
                 // recoil = 10 기준 x=0.05 z=0.05, 10단위로 커질때마다 
@@ -96,11 +96,12 @@ namespace ProjectSL
                 Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
 
                 // bulletForceDirection 에서 최대 spreadAmount 만큼 right/up 방향으로 랜덤 추가
+                //Vector3 bulletForceDirection = firePoint.forward;
                 Vector3 bulletForceDirection = firePoint.forward + firePoint.right * Random.Range(-1f, 1f) * spreadAmount + firePoint.up * Random.Range(-1f, 1f) * spreadAmount;
                 bulletForceDirection = bulletForceDirection.normalized;
                 bulletRigidbody.AddForce(bulletForceDirection * bulletSpeed, ForceMode.Impulse);
 
-                if (linkedCharacter.isPlayer && crosshairUI != null)
+                if (linkedCharacter != null && linkedCharacter.isPlayer && crosshairUI != null)
                 {
                     crosshairUI.SpreadCrosshair(adjustedAccuracy);
                 }
@@ -114,7 +115,7 @@ namespace ProjectSL
                 muzzle.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
 
                 // 플레이어일때만 GenerateImpulse 및 CameraRecoil 이 실행되어야 한다. NPC 일 경우 GenerateImpulse가 발생하면 플레이어 카메라에 영향을 주기 때문에 실행되면 안된다
-                if (linkedCharacter.isPlayer)
+                if (linkedCharacter != null && linkedCharacter.isPlayer)
                 {
                     
                     impulseSource.GenerateImpulse();

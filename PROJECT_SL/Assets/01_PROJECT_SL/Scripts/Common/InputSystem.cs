@@ -116,7 +116,7 @@ namespace ProjectSL
                 OnClickedPauseButton?.Invoke();
             }
 
-            if (!PlayerCharacterController.Instance.LinkedCharacter.fixDirection)
+            if (PlayerCharacterController.Instance != null && !PlayerCharacterController.Instance.LinkedCharacter.fixDirection)
             {
                 horizontal = Input.GetAxis("Horizontal");
                 vertical = Input.GetAxis("Vertical");

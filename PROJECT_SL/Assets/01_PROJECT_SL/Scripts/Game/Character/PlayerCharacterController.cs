@@ -63,14 +63,17 @@ namespace ProjectSL
 
             LinkedCharacter.OnItemPicked += OnLinkedCharacterItemPicked;
 
+            LinkedCharacter.OnPlayerCharacterDeath += () =>
+            {
+                StartCoroutine(AfterDeathCoroutine());
+            };
+
             // 임시 코드
             if (GameDataModel.Singleton.GetItemData("Item_00001", out ItemDataDTO.ItemData result))
             {
                 ItemSO itemSO = result.GetItemSO();
             }
         }
-
-        
 
         private void OnDestroy()
         {
@@ -88,6 +91,17 @@ namespace ProjectSL
             InputSystem.Singleton.OnClickedLeftControl -= OnClickedRoll;
 
             LinkedCharacter.OnItemPicked -= OnLinkedCharacterItemPicked;
+        }
+
+        IEnumerator AfterDeathCoroutine()
+        {
+            Time.timeScale = 0.1f;
+
+            yield return new WaitForSecondsRealtime(3f);
+
+            Time.timeScale = 1f;
+
+            UIManager.Show<DeathUI>(UIList.DeathUI);
         }
 
         private void Update()
