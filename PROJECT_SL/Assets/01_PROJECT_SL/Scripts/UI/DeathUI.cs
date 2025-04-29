@@ -22,6 +22,7 @@ namespace ProjectSL
 
         public void OnClickRestartButton()
         {
+            UIManager.Hide<DeathUI>(UIList.DeathUI);
             Main.Singleton.ChangeScene(SceneType.Ingame, isForceLoad: true);
         }
 

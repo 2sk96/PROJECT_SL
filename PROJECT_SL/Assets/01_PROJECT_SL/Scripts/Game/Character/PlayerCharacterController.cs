@@ -43,6 +43,7 @@ namespace ProjectSL
         {
             Instance = this;
             linkedCharacter = GetComponent<CharacterBase>();
+            linkedCharacter.isPlayer = true;
 
             mainHUDUI = UIManager.Singleton.GetUI<MainHUDUI>(UIList.MainHUDUI);
             interactionUI = UIManager.Show<InteractionUI>(UIList.InteractionUI);
