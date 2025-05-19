@@ -33,22 +33,22 @@ namespace ProjectSL
 
             for (int i = 0; i < craftingItemDatas.Count; i++)
             {
-                AddItem(craftingItemDatas[i].itemID, craftingItemDatas[i].count);
+                AddItem(craftingItemDatas[i].TargetItemID, craftingItemDatas[i].TargetItemCount);
             }
         }
 
         public void AddItem(string itemID, int count)
         {
-            var newInfiniteData = new InventoryUI_InfiniteScrollData();
-            newInfiniteData.itemID = itemID;
-            newInfiniteData.itemCount = count;
+            var newInfiniteData = new InventoryUI_CraftingInfiniteScrollData();
+            newInfiniteData.targetItemID = itemID;
+            newInfiniteData.targetItemCount = count;
 
             infiniteScroll.InsertData(newInfiniteData);
         }
 
-        public void AddItemToCraftingInventory(UserItemDTO newItemDTO)
+        public void AddItemToCraftingInventory(CraftingDataDTO.CraftingData craftingData)
         {
-            AddItem(newItemDTO.itemID, newItemDTO.count);
+            AddItem(craftingData.TargetItemID, craftingData.TargetItemCount);
         }
     }
 }

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3763572511180658588}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.52741355
+  m_Size: 0.9993385
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -401,7 +401,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   needItemCount: 0
-  itemPrefab: {fileID: -247930370101306466, guid: c10a24584284c6140b18ebfb55b821cc, type: 3}
+  itemPrefab: {fileID: 4686641664843594264, guid: 8302c29c1e0cbcc478d0cb1cf9bfd6bc, type: 3}
   dynamicItemSize: 0
   layout:
     axis: 1
@@ -488,7 +488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.07618026}
+  m_AnchoredPosition: {x: 0, y: 0.000070376664}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6310240188436592437

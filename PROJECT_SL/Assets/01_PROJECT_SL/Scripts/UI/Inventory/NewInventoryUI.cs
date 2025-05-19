@@ -12,7 +12,7 @@ namespace ProjectSL
 
         public List<UserItemDTO> consumableItems = new List<UserItemDTO>();
         public List<UserItemDTO> equipmentItems = new List<UserItemDTO>();
-        public List<UserItemDTO> craftingItems = new List<UserItemDTO>();
+        public List<CraftingDataDTO.CraftingData> craftingItems = new List<CraftingDataDTO.CraftingData>();
 
         public event System.Action<UserItemDTO> OnConsumableItemAdded;
         public event System.Action<UserItemDTO> OnConsumableItemUpdated;
@@ -20,7 +20,7 @@ namespace ProjectSL
         public event System.Action<UserItemDTO> OnEquipmentItemAdded;
         public event System.Action<UserItemDTO> OnEquipmentItemUpdated;
 
-        public event System.Action<UserItemDTO> OnCraftingItemAdded;
+        public event System.Action<CraftingDataDTO.CraftingData> OnCraftingItemAdded;
 
 
 
@@ -91,11 +91,10 @@ namespace ProjectSL
             var craftingItemDatas = GameDataModel.Singleton.CraftingData.CraftingDatas;
             for (int i = 0; i < craftingItemDatas.Count; i++)
             {
-                var checkCraftingItem = craftingItems.Find(x => x.itemID == craftingItemDatas[i].TargetItemID);
+                var checkCraftingItem = craftingItems.Find(x => x.TargetItemID == craftingItemDatas[i].TargetItemID);
                 if (checkCraftingItem == null)
                 {
-                    var newCraftingItem = new UserItemDTO();
-                    newCraftingItem = UserDataModel.Singleton.CreateNewItemDTO(craftingItemDatas[i].TargetItemID, craftingItemDatas[i].TargetItemCount);
+                    var newCraftingItem = craftingItemDatas[i];
                     craftingItems.Add(newCraftingItem);
                     OnCraftingItemAdded?.Invoke(newCraftingItem);
                 }
