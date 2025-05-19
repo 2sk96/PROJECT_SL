@@ -91,6 +91,21 @@ namespace ProjectSL
             InventoryType inventoryCategory = itemData.InventoryCategory;
             return inventoryCategory;
         }
+        
+        public bool GetIsStackableFromItemData(string itemID)
+        {
+            ItemDataDTO.ItemData itemData = ItemData.ItemDatas.Find(x => x.ItemID == itemID);
+            bool isStackable = itemData.IsStackable;
+            return isStackable;
+        }
+
+        public string GetItemNameFromItemData(string itemID)
+        {
+            ItemDataDTO.ItemData itemData = ItemData.ItemDatas.Find(x => x.ItemID == itemID);
+            Debug.Log(itemID);
+            string itemName = itemData.ItemName;
+            return itemName;
+        }
 
         //public float GetWeaponRecoilAmount(float recoil)
         //{

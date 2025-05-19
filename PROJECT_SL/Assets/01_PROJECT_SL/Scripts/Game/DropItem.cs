@@ -16,26 +16,10 @@ namespace ProjectSL
 
         public int count = 1;
 
-        public Sprite sprite;
-
-        public bool isStackable;
-
-        public ItemDataDTO.ItemData dropItemData;
 
         private void Awake()
         {
-            if (GameDataModel.Singleton.GetItemData(itemID, out ItemDataDTO.ItemData itemData))
-            {
-                dropItemData = itemData;
-
-                itemName = itemData.ItemName;
-                isStackable = itemData.IsStackable;
-                ItemSO itemSO = itemData.GetItemSO();
-                if (itemSO != null)
-                {
-                    sprite = itemSO.sprite;
-                }
-            }
+            itemName = GameDataModel.Singleton.GetItemNameFromItemData(itemID);
         }
         public void Interact(CharacterBase actor)   // actor = Player = LinkedCharacter
         {

@@ -322,17 +322,10 @@ namespace ProjectSL
         // CharcterBase 에서 아이템이 실제로 줏어졌을 때 실행
         private void OnLinkedCharacterItemPicked(DropItem item)
         {
-            ItemDataDTO.ItemData itemData = item.dropItemData;
-            
             string itemID = item.itemID;
-            string itemName = item.itemName;
             int itemCount = item.count;
-            Sprite sprite = item.sprite;
-            bool isStackable = item.isStackable;
 
-            //UserDataModel.Singleton.AddItemData(itemID, itemName, sprite, isStackable, itemCount);
-
-            UserDataModel.Singleton.AddItemData2(itemData, itemCount);
+            UserDataModel.Singleton.AddItemData(itemID, itemCount);
 
         }
 
