@@ -189,6 +189,12 @@ namespace ProjectSL
         {
             currentHealth = maxHealth;
             currentStamina = maxStamina;
+
+            // TODO 1 : 래그돌 비활성화
+            //    => RagDoll 로 연결해 둔 RigidBody/Collider 비활성화
+            //    => 이떄 Animator / CharacterController 는 당연히 활성화 되어 있어야 한다
+
+
         }
 
         private void Update()
@@ -662,6 +668,12 @@ namespace ProjectSL
                 {
                     // 아직 모션 추가 안됨
                     //characterAnimator.SetTrigger("Death Trigger");
+
+                    // TODO 1 : 래그돌 활성화
+                    //    => RagDoll 로 연결해 둔 RigidBody/Collider 활성화
+                    // TODO 2 : CharacterController 비활성화
+                    // TODO 3 : Animator 비활성화
+                    
                     OnPlayerCharacterDeath?.Invoke();
                 }
             }
