@@ -825,7 +825,7 @@ Transform:
   m_GameObject: {fileID: 44603326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.16, y: 101.4, z: 10.79}
+  m_LocalPosition: {x: 0.7, y: 1.4, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2314,7 +2314,7 @@ Transform:
   m_GameObject: {fileID: 356550665}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0073763942, y: 0.9767427, z: -0.21156736, w: 0.03403883}
-  m_LocalPosition: {x: 19.16, y: 101.4, z: 10.79}
+  m_LocalPosition: {x: 0.7, y: 1.4, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3372,6 +3372,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle (1)
@@ -5206,6 +5210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle (3)
@@ -8455,7 +8463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8777,7 +8785,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10349,7 +10357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12146,6 +12154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle (4)
@@ -12460,6 +12472,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle
@@ -13539,7 +13555,7 @@ Transform:
   m_GameObject: {fileID: 1684348518}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.996, y: 100, z: 12.967}
+  m_LocalPosition: {x: 15, y: 100, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14427,6 +14443,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle (2)
@@ -14527,7 +14547,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14725,7 +14745,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -16220,6 +16240,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1425247147655581239, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a4b350619beb114b9a1b6c2bbcc8b6c, type: 2}
     - target: {fileID: 4788429367887994422, guid: cacc151ab074e034e9a95193f9a752f2, type: 3}
       propertyPath: m_Name
       value: DropItem_Rifle (5)
@@ -21824,7 +21848,7 @@ Transform:
   m_GameObject: {fileID: 6771446013941927075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.46, y: 100, z: 12.79}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
