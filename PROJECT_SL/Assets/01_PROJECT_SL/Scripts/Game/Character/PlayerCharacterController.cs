@@ -79,9 +79,8 @@ namespace ProjectSL
         private void OnDestroy()
         {
             Instance = null;
-            
             InputSystem.Singleton.OnClickedAlpha1 -= OnClickedAlpha1;
-            InputSystem.Singleton.OnClickedAlpha2 += OnClickedAlpha2;
+            InputSystem.Singleton.OnClickedAlpha2 -= OnClickedAlpha2;
             InputSystem.Singleton.OnClickedCrouch -= OnClickedCrouch;
             InputSystem.Singleton.OnClickedReload -= OnClickedReload;
             InputSystem.Singleton.OnClickedInteraction -= OnClickedInteraction;
@@ -292,7 +291,7 @@ namespace ProjectSL
         private void OnClickInventory()
         {
             var inventoryUI = UIManager.Singleton.GetUI<NewInventoryUI>(UIList.NewInventoryUI);
-
+            
             if (inventoryUI.gameObject.activeSelf)
             {
                 UIManager.Hide<NewInventoryUI>(UIList.NewInventoryUI);
