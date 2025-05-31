@@ -161,5 +161,10 @@ namespace ProjectSL
                     break;
             }
         }
+
+        public void CloseInventory()
+        {
+            UIManager.Hide<NewInventoryUI>(UIList.NewInventoryUI);
+        }
     }
 }
