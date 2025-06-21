@@ -221,9 +221,9 @@ namespace ProjectSL
             CheckActiveIK_Aiming();
             CheckActiveIK_LeftHand();
 
-            aimingRig.weight = Mathf.Lerp(aimingRig.weight, isActiveAimingIK ? 1f : 0f, Time.deltaTime * 10f);
-            leftHandRifleRig.weight = Mathf.Lerp(leftHandRifleRig.weight, isActiveLeftHandIKRifle ? 1f : 0f, Time.deltaTime * 10f);
-            leftHandPistolRig.weight = Mathf.Lerp(leftHandPistolRig.weight, isActiveLeftHandIKPistol ? 1f : 0f, Time.deltaTime * 10f);
+            if (aimingRig) aimingRig.weight = Mathf.Lerp(aimingRig.weight, isActiveAimingIK ? 1f : 0f, Time.deltaTime * 10f);
+            if (leftHandRifleRig) leftHandRifleRig.weight = Mathf.Lerp(leftHandRifleRig.weight, isActiveLeftHandIKRifle ? 1f : 0f, Time.deltaTime * 10f);
+            if (leftHandPistolRig) leftHandPistolRig.weight = Mathf.Lerp(leftHandPistolRig.weight, isActiveLeftHandIKPistol ? 1f : 0f, Time.deltaTime * 10f);
 
         }
 

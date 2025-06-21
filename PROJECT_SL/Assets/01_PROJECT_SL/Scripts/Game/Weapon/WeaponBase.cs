@@ -127,6 +127,8 @@ namespace ProjectSL
                     PlayerCharacterController.Instance.CameraRecoil(recoilAmount, verticalRecoil, horizontalRecoil);
 
                 }
+
+                SoundManager.Singleton.PlaySFX("Gun_Fire_Loop", firePoint.position);
             }
         }
 

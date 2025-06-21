@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/01_PROJECT_SL/Scenes/Empty.unity
     guid: bed181fb335c7484396dd5f9469f7b1b
   - enabled: 1
-    path: Assets/01_PROJECT_SL/Scenes/Ingame.unity
+    path: Assets/01_PROJECT_SL/Scenes/Ingame (Test).unity
     guid: d6bf2ef64939e1a44a118023094070f5
   - enabled: 1
     path: Assets/01_PROJECT_SL/Scenes/Title.unity

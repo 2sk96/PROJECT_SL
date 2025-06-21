@@ -16,6 +16,7 @@ namespace ProjectSL
             }
 
             // TODO 인게임 장면에서 필요한 초기화 작업을 수행
+            SoundManager.Singleton.PlayMusic("BGM_01");
 
             // TODO : 인게임 화면에서 필요한 UI 활성화
             UIManager.ShowIngameUIs();

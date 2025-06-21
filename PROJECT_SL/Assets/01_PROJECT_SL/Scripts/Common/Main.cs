@@ -52,7 +52,8 @@ namespace ProjectSL
             GameDataModel.Singleton.Initialize();
             UIManager.Singleton.Initialize();
             InputSystem.Singleton.Initialize();
-            
+            SoundManager.Singleton.Initialize();
+
             // EventSystem Prefab 복제 후 Even.Main의 자식으로 추가
             GameObject eventSystemPrefab = Resources.Load<GameObject>("EventSystem/EventSystem");
             GameObject esInstance = UnityEngine.Object.Instantiate(eventSystemPrefab);

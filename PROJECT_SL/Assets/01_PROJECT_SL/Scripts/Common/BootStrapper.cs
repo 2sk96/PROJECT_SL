@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace ProjectSL
 {
@@ -36,6 +37,7 @@ namespace ProjectSL
                 InternalBoot();
                 if (activeScene.name.Contains("Ingame"))
                 {
+                    Main.Singleton.StartCoroutine(PostProcessFlow());
                     UIManager.ShowIngameUIs();
                 }
             }
@@ -46,6 +48,13 @@ namespace ProjectSL
             Main.Singleton.Initialize();
 
             // BootStrapper에서 추가적인 커스텀 작업을 추가하고 싶을 경우 여기에 추가해 주면 된다.
+        }
+
+        static IEnumerator PostProcessFlow()
+        {
+            yield return null;
+
+            SoundManager.Singleton.PlayMusic("BGM_01");
         }
     }
 }
